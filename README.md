@@ -117,6 +117,14 @@ As the owner:
 
 ### Development
 
+I added this section to document the development process of the application so the user or assessor could get an idea of how I approached building this application.
+
+From the get go I broke it up into three distinct phases.
+
+- Firstly I wanted to build a blackjack game that worked in the terminal. This was the most simple step as this is a pretty beginner friendly application to make.
+- From here the next step was refactoring the code to make it more lightweight and extendable.
+- The next and final phase was taking this lightweight code and rebuilding it in Blessed, this would remove any and all print statements, and allow us to effectively turn the terminal into our own gui
+
 ---
 
 ### Credits & Attributions
