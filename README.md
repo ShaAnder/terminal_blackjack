@@ -77,3 +77,46 @@ The game runs utilizing a simplified version of the rules and concepts of blackj
 - for simplicities sake the CPU will always try and draw until it is at 16 or over and then will automatically stand
 - The closest player to 21 OR whoever lands on 21 wins, also for simplicities sake if both the player and CPU hit 21, the CPU (house) will be declared the winner
 - Whoever goes over 21 on their turn is automatically declared the loser.
+
+---
+
+### User Stories
+
+I opted to follow a traditional user stories / objective model on how to run the game.
+
+As a user
+
+- I want a dynamic game of blackjack that I can play, I don't want to have to scroll through hundreds of print statements
+- I want the game to be simple to understand and play with clear instructions
+- I want clear visual cues indicating the current state of the game
+
+As the owner:
+
+- I want to ensure a simple clean terminal that doesn't require a lot of print() statements
+- I want to ensure that the site is visually striking and memorable
+- My concern is less the site being responsive and more than it can be played on the devices, as it will be hosted in the terminal it won't be playable on mobile
+- I want to ensure that the code leverages best practices as I want to extend this application in the future
+
+---
+
+### Features
+
+---
+
+### Data Model
+
+---
+
+### Testing
+
+---
+
+### Deployment
+
+---
+
+### Development
+
+---
+
+### Credits & Attributions
