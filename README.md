@@ -133,6 +133,7 @@ With these in mind, below you can find an exhaustive list of the broad steps I t
   - Card class created to hold our card attributes
   - Variables holding all of our card attributes created
   - Card building function created
+  - Added main deck creation to run.py, creates 52 card objects for us to use in the game
 
 ---
 

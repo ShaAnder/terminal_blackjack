@@ -8,6 +8,7 @@ Main card class, this creates our blackjack card to append to the cards list
 
 # we want random to generate random cards ect
 import random
+from .layout import hidden_card
 
 class Card:
   """
@@ -50,21 +51,21 @@ class Card:
           c = c + top
         elif i == 1:
           if card.value == "10":
-            c = c + left_value.format(card_value)
+            c = c + left_value.format(card.value)
           else:
-            c = c + left_value.format(card_value)
+            c = c + left_value.format(card.value)
         elif i == 5:
             c = c + suit.format(card.suit)
         elif i == 79:
           if card.value == "10":
-            c = c + left_value.format(card_value)
+            c = c + left_value.format(card.value)
           else:
-            c = c + left_value.format(card_value)
+            c = c + left_value.format(card.value)
         elif i == 10:
           c = c + bottom
         else:
           c = c + base
-    if hidden === True:
+    if hidden == True:
       print(hidden_card)
     else:
       print(c)
