@@ -1,1 +1,1 @@
-# Your requirements go here
+blessed==1.20.0
