@@ -9,3 +9,4 @@ the data and attributes to run our blackjack game
 
 # we want random to generate random cards ect
 import random
+
