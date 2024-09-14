@@ -89,17 +89,17 @@ And remember the house always wins...
 
 # this is an example card, it will be dynamically created via a function and
 # inserted into a list for reading later
-card = """
+hidden_card = """
 ┌───────────────┐
+│ ?             │
 │               │
 │               │
 │               │
+│       ?       │
 │               │
 │               │
 │               │
-│               │
-│               │
-│               │
+│             ? │
 └───────────────┘                                                                   
 """
 
