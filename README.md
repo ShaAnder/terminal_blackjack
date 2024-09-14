@@ -125,6 +125,15 @@ From the get go I broke it up into three distinct phases.
 - From here the next step was refactoring the code to make it more lightweight and extendable.
 - The next and final phase was taking this lightweight code and rebuilding it in Blessed, this would remove any and all print statements, and allow us to effectively turn the terminal into our own gui
 
+With these in mind, below you can find an exhaustive list of the broad steps I took to implement each process, the three major subsections are going to be split into P1, P2, P3 for easier reading
+
+- #### P1: Building the blackjack app
+  14/09/2024
+  - We want to build a class based blackjack app, to that end the layout.py (to hold our terminal images, the game.py (for our game logic) and the card.py (to create our card) files are created)
+  - Card class created to hold our card attributes
+  - Variables holding all of our card attributes created
+  - Card building function created
+
 ---
 
 ### Credits & Attributions
