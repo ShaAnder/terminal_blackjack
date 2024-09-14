@@ -25,6 +25,9 @@ card_values = {"A": 11, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, 
 
 # now we want to create deck based on our suits values and cards
 def create_deck():
+  """
+  Builds our deck of cards from the Card function
+  """
   deck = []
   for suit in suits:
     for card in cards:
