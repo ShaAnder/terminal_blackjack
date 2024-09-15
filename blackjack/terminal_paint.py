@@ -50,7 +50,7 @@ def intro():
   for line in layout.instructions_cards.split("\n"):
     print(term.white + term.center(line))
   # using our coordinate function, print our start text
-  position(term.center("press any key to continue"), 0, 25, term.black_on_orange)
+  position(term.center("press any key to continue"), 0, 20, term.black_on_white)
   # check for inputs, then clear the screen, 
   # break -> reads keystroke immediately after it's pressed
   # hidden cursor -> hides cursor
@@ -86,8 +86,8 @@ def board(*display_cards):
   """
   clear()
   position(term.center(layout.computer_board))
-  position(term.center(display_cards), 0, 39, term.black_on_orange)
-  position(term.center("press to begin the game"), 0, 40, term.black_on_orange)
+  position(term.center(display_cards), 0, 39, term.black_on_white)
+  position(term.center("press to begin the game"), 0, 40, term.black_on_white)
 
 
 def table_setup():
