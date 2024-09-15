@@ -46,9 +46,11 @@ def intro():
   clear()
   # gets every line in the logo, splits it and then prints / colors it
   for line in layout.game_heading.split("\n"):
-    print(term.yellow + term.center(line))
+    print(term.orange + term.center(line))
+  for line in layout.instructions_cards.split("\n"):
+    print(term.orange + term.center(line))
   # using our coordinate function, print our start text
-  position(term.center("press any key to continue"), 0, 10, term.black_on_yellow)
+  position(term.center("press any key to continue"), 0, 10, term.black_on_orange)
   # check for inputs, then clear the screen, 
   # break -> reads keystroke immediately after it's pressed
   # hidden cursor -> hides cursor
@@ -64,17 +66,13 @@ def instructions():
   """
   clear()
   for line in layout.welcome_heading.split("\n"):
-    print(term.yellow + term.center(line))
+    print(term.orange + term.center(line))
   for line in layout.instructions_text.split("\n"):
-    print(term.yellow + term.center(line))
+    print(term.orange + term.center(line))
   for line in layout.border.split("\n"):
-    print(term.yellow + term.center(line))
-  for line in layout.instructions_cards.split("\n"):
-    print(term.yellow + term.center(line))
-  for line in layout.border.split("\n"):
-    print(term.yellow + term.center(line))
-  position(term.center(layout.house_text), 0, 39, term.black_on_yellow)
-  position(term.center("press to begin the game"), 0, 40, term.black_on_yellow)
+    print(term.orange + term.center(line))
+  position(term.center(layout.house_text), 0, 39, term.black_on_orange)
+  position(term.center("press to begin the game"), 0, 40, term.black_on_orange)
   with term.cbreak(), term.hidden_cursor():
     term.inkey()
   clear()
@@ -88,8 +86,8 @@ def board(*display_cards):
   """
   clear()
   position(term.center(layout.computer_board))
-  position(term.center(display_cards), 0, 39, term.black_on_yellow)
-  position(term.center("press to begin the game"), 0, 40, term.black_on_yellow)
+  position(term.center(display_cards), 0, 39, term.black_on_orange)
+  position(term.center("press to begin the game"), 0, 40, term.black_on_orange)
 
 
 def table_setup():
