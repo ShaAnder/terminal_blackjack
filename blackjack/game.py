@@ -14,6 +14,7 @@ from time import sleep
 from .card import Card
 # import random to get our random cards
 import random
+from .terminal_paint import *
 
 
 ### --- VARIABLES --- ###
@@ -67,6 +68,13 @@ def blackjack_start(deck):
   """
   Main blackjack function, each run is one game
   """
+
+  ##########################
+  # Step 1 Draw our Intro #
+  ##########################
+  intro()
+
+
   # set our player and dealers cards
   player_card_data = [] # Data containing the card objects
   player_cards = [] # Actual cards for printing
@@ -84,25 +92,19 @@ def blackjack_start(deck):
     draw_card(deck, player_card_data, player_cards, False)
     # update our player score
     player_score += player_card_data[i].card_value
-    # increase count to get correct scores
-    i+= 1
+
     # next we need to account for aces
     if len(player_card_data) == 2:
       if player_card_data[0].card_value == 11 and player_card_data[1].card_value == 11:
         player_card_data[0] = 1
         player_score -= 10
 
-    print(player_score)
+#testing
+  # print('\n'.join(''.join(map(str,sl)) for sl in player_cards))
 
 
 
 
-
-# testing
-  for i in range(len(player_cards)):
-    print(player_cards[i])
-    print(player_card_data[i])
-  
 
 
 
