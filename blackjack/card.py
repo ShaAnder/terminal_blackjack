@@ -25,50 +25,54 @@ class Card:
 
   # added create card function to card class because it's logically to
   # do with card creation
-  def create_card(self, cards, hidden):
+  def create_card(cards, hidden):
     """
     Function to create our card, takes the cards input and using our
     pieces generates cards to add to our deck
     """
 
     #our card pieces:
-    top = "\t┌────────────────┐"
-    bottom = "\t└────────────────┘"
-    base = "\t│                │"
-    left_value = "\t│ {}             │"
-    right_value = "\t│             {} │"
-    suit = "\t│        {}       │"
+    top = "\t┌───────────────┐\n"
+    bottom = "\t└───────────────┘\n"
+    base = "\t│               │\n"
+    left_value = "\t│ {}            │\n"
+    left_value_spaced = "\t│ {}             │\n"
+    right_value = "\t│            {} │\n"
+    right_value_spaced = "\t│             {} │\n"
+    suit = "\t│       {}       │\n"
 
 
     # this is our card building functionality, we want to 
     # dynamically build a card if it's face up, UNLESS
     # the card is hidden (dealer cards), if the card is hidden
-    # we instead return a blank card
-    c = """"""
-    for i in range(11):      
-      for card in cards:
+    # we instead return a blank card 
+    c = []
+    new_card = ""
+    for card in cards:
+      for i in range(11):      
         if i == 0:
-          c = c + top
+          c.append(top)
         elif i == 1:
           if card.value == "10":
-            c = c + left_value.format(card.value)
+            c.append(left_value.format(card.value))
           else:
-            c = c + left_value.format(card.value)
+            c.append(left_value_spaced.format(card.value))
         elif i == 5:
-            c = c + suit.format(card.suit)
-        elif i == 79:
+            c.append(suit.format(card.suit))
+        elif i == 9:
           if card.value == "10":
-            c = c + left_value.format(card.value)
+            c.append(right_value.format(card.value))
           else:
-            c = c + left_value.format(card.value)
+            c.append(right_value_spaced.format(card.value))
         elif i == 10:
-          c = c + bottom
+          c.append(bottom)
         else:
-          c = c + base
+          c.append(base)
     if hidden == True:
-      print(hidden_card)
+      return hidden_card
     else:
-      print(c)
+      new_card += "".join(c)
+      return new_card
 
 
 
