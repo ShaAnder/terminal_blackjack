@@ -41,32 +41,60 @@ def create_deck():
 
   return deck
 
+
+def draw_card(deck, player_card_data, player_cards, hidden):
+  """
+  Draws A card, converts it and then appends the card data and card to
+  the users hand.
+
+  Args:
+      deck (list): list (deck of cars)
+      player_card_data (list): the card data of the player in question
+      player_cards (list): The cards of the player in question
+      hidden (Bool): Hidden T/F for card, if False Card face up, else hidden
+  """
+  # draw a card from the deck
+  card = random.choice(deck)
+  deck.remove(card)
+  # convert the card to a readable format
+  converted_card = Card.create_card(card, hidden)
+  # append to both player card and player card data
+  player_card_data.append(card)
+  player_cards.append(converted_card)
+
+
 def blackjack_start(deck):
   """
   Main blackjack function, each run is one game
   """
   # set our player and dealers cards
-  player_card_data = []
-  player_cards = []
+  player_card_data = [] # Data containing the card objects
+  player_cards = [] # Actual cards for printing
   dealer_card_data = []
   dealer_cards = []
   # set our player and dealers scores
   player_score = 0
   dealer_score = 0
-  # from here we do our main game loop, we can check if the player
-  # cards lentgth is less than 2 and draw until that. 
+
+  # Now we want to call a function to draw a card and return it, 
+  # removing that card from the deck in the process
   while len(player_card_data) < 2:
-    # deal our player cards and remove them from the deck
-    player_card = random.choice(deck)
-    player_card_data.append(player_card)
-    deck.remove(player_card)
+    draw_card(deck, player_card_data, player_cards, False)
   
 
-  for card in player_card_data:
-    c = Card.create_card(card, False)
-    player_cards.append(c)
-      
-  print(player_cards[0], "\n" , player_cards[1])
+
+
+
+
+
+
+#testing
+  for i in range(len(player_cards)):
+    print(player_cards[i])
+    print(player_card_data[i])
+  
+
+
 
 
 

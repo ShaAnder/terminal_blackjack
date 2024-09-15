@@ -32,14 +32,14 @@ class Card:
     """
 
     #our card pieces:
-    top = "\t┌───────────────┐"
-    bottom = "\t└───────────────┘"
-    base = "\t│               │"
-    left_value = "\t│ {}            │"
-    left_value_spaced = "\t│ {}             │"
-    right_value = "\t│            {} │"
-    right_value_spaced = "\t│             {} │"
-    suit = "\t│       {}       │"
+    top = "┌───────────────┐"
+    bottom = "└───────────────┘"
+    base = "│               │"
+    left_value = "│ {}            │"
+    left_value_spaced = "│ {}             │"
+    right_value = "│            {} │"
+    right_value_spaced = "│             {} │"
+    suit = "│       {}       │"
 
 
     # this is our card building functionality, we want to 
