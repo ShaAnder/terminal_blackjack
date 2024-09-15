@@ -46,18 +46,27 @@ def blackjack_start(deck):
   Main blackjack function, each run is one game
   """
   # set our player and dealers cards
+  player_card_data = []
   player_cards = []
+  dealer_card_data = []
   dealer_cards = []
   # set our player and dealers scores
   player_score = 0
   dealer_score = 0
   # from here we do our main game loop, we can check if the player
   # cards lentgth is less than 2 and draw until that. 
-  while len(player_cards) < 2:
+  while len(player_card_data) < 2:
     # deal our player cards and remove them from the deck
     player_card = random.choice(deck)
-    player_cards.append(player_card)
+    player_card_data.append(player_card)
     deck.remove(player_card)
-    
-  print(Card.create_card(player_cards, False))
+  
+
+  for card in player_card_data:
+    c = Card.create_card(card, False)
+    player_cards.append(c)
+      
+  print(player_cards[0], "\n" , player_cards[1])
+
+
 
