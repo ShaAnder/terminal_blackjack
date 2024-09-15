@@ -15,6 +15,7 @@ from .card import Card
 # import random to get our random cards
 import random
 from .terminal_paint import *
+from os import name, system
 
 
 ### --- VARIABLES --- ###
@@ -25,6 +26,17 @@ cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
 cards_values = {"A": 11, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "J":10, "Q":10, "K":10}
 
 ### --- FUNCTIONS --- ###
+
+def clear():
+    """
+    Clears the console.
+    """
+    # for windows
+    if name == 'nt':
+        _ = system('cls')
+    # for mac and linux(here, os.name is 'posix')
+    else:
+        _ = system('clear')
 
 def create_deck():
   """
@@ -93,6 +105,7 @@ def blackjack_start(deck):
   ########################
   intro()
   instructions()
+  clear()
 
   # set our player and dealers cards
   player_card_data = [] # Data containing the card objects
@@ -102,7 +115,9 @@ def blackjack_start(deck):
   # set our player and dealers scores
   player_score = 0
   dealer_score = 0
-  total_cards = 5
+
+  #intial variable for our total cards
+  total_cards = 2
 
   # while loop to do our initial card drawing
   # i to keep track of the loops
@@ -119,8 +134,7 @@ def blackjack_start(deck):
         player_card_data[0] = 1
         player_score -= 10
 
-#testing
-  # display_cards(player_cards)
+
 
 
   
