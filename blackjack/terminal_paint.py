@@ -69,10 +69,8 @@ def instructions():
     print(term.white + term.center(line))
   for line in layout.instructions_text.split("\n"):
     print(term.white + term.center(line))
-  for line in layout.border.split("\n"):
-    print(term.white + term.center(line))
-  position(term.center(layout.house_text), 0, 39, term.black_on_white)
-  position(term.center("press to begin the game"), 0, 40, term.black_on_white)
+  position(term.center(layout.house_text), 0, 35, term.black_on_white)
+  position(term.center("press to begin the game"), 0, 36, term.black_on_white)
   with term.cbreak(), term.hidden_cursor():
     term.inkey()
   clear()
