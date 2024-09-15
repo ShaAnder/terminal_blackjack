@@ -64,6 +64,25 @@ def draw_card(deck, player_card_data, player_cards, hidden):
   player_cards.append(converted_card)
 
 
+def display_cards(cards):
+  """
+  Takes the card array and splits it into lines for
+  printing side by side in the terminal
+
+  Args:
+      cards (list): the player or dealer card list for displaying cards
+  """
+  # get the lines for each card in the card list
+  card_lines = [card.splitlines() for card in cards]
+  max_lines = max(len(lines) for lines in card_lines)
+
+  for i in range(max_lines):
+    line_to_print = ""
+    for lines in card_lines:
+      line = lines[i] if i < len(lines) else " " * len(lines[0])
+      line_to_print += line + " "
+    print(line_to_print)
+
 def blackjack_start(deck):
   """
   Main blackjack function, each run is one game
@@ -72,8 +91,8 @@ def blackjack_start(deck):
   ##########################
   # Step 1 Draw our Intro #
   ##########################
-  intro()
-
+  # intro()
+  # instructions()
 
   # set our player and dealers cards
   player_card_data = [] # Data containing the card objects
@@ -83,30 +102,25 @@ def blackjack_start(deck):
   # set our player and dealers scores
   player_score = 0
   dealer_score = 0
+  total_cards = 5
 
   # while loop to do our initial card drawing
   # i to keep track of the loops
   i = 0
-  while len(player_card_data) < 2:
+  while len(player_card_data) < total_cards:
     # draw our player cards
     draw_card(deck, player_card_data, player_cards, False)
     # update our player score
     player_score += player_card_data[i].card_value
 
     # next we need to account for aces
-    if len(player_card_data) == 2:
+    if len(player_card_data) == total_cards:
       if player_card_data[0].card_value == 11 and player_card_data[1].card_value == 11:
         player_card_data[0] = 1
         player_score -= 10
 
 #testing
-  # print('\n'.join(''.join(map(str,sl)) for sl in player_cards))
+  display_cards(player_cards)
 
 
-
-
-
-
-
-
-
+  

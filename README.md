@@ -128,12 +128,20 @@ From the get go I broke it up into three distinct phases.
 With these in mind, below you can find an exhaustive list of the broad steps I took to implement each process, the three major subsections are going to be split into P1, P2, P3 for easier reading
 
 - #### P1: Building the blackjack app
+
   14/09/2024
+
   - We want to build a class based blackjack app, to that end the layout.py (to hold our terminal images, the game.py (for our game logic) and the card.py (to create our card) files are created)
   - Card class created to hold our card attributes
   - Variables holding all of our card attributes created
   - Card building function created
   - Added main deck creation to run.py, creates 52 card objects for us to use in the game
+
+  15/09/2024
+
+  - Added Ability to draw cards for the players
+  - Fixed cards not displaying side by side
+  - Added terminal paint files for intro / header screen
 
 ---
 

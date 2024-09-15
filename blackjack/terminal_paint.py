@@ -45,10 +45,10 @@ def intro():
   # clear screen function
   clear()
   # gets every line in the logo, splits it and then prints / colors it
-  for line in layout.game_heading.split('\n'):
+  for line in layout.game_heading.split("\n"):
     print(term.yellow + term.center(line))
   # using our coordinate function, print our start text
-  position(term.center('press any key to continue'), 0, 10, term.black_on_yellow)
+  position(term.center("press any key to continue"), 0, 10, term.black_on_yellow)
   # check for inputs, then clear the screen, 
   # break -> reads keystroke immediately after it's pressed
   # hidden cursor -> hides cursor
@@ -56,6 +56,21 @@ def intro():
   with term.cbreak(), term.hidden_cursor():
     term.inkey()
   # clear when inkey is recognized
+  clear()
+
+def instructions():
+  """
+  Creats the instructions screen for the game
+  """
+  clear()
+  for line in layout.welcome_heading.split("\n"):
+    print(term.yellow + term.center(line))
+  for line in layout.instructions_text.split("\n"):
+    print(term.yellow + term.center(line))
+  position(term.center(layout.house_text), 0, 39, term.black_on_yellow)
+  position(term.center("press to begin the game"), 0, 40, term.black_on_yellow)
+  with term.cbreak(), term.hidden_cursor():
+    term.inkey()
   clear()
 
 def table_setup():
