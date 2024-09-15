@@ -73,6 +73,19 @@ def instructions():
     term.inkey()
   clear()
 
+def board(*display_cards):
+  """
+  Populate the terminal window with the dynamic cards we created in game.py
+
+  Args:
+      display_cards (func): returned function for displaying the current cards
+  """
+  clear()
+  position(term.center(layout.computer_board))
+  position(term.center(display_cards), 0, 39, term.black_on_yellow)
+  position(term.center("press to begin the game"), 0, 40, term.black_on_yellow)
+
+
 def table_setup():
   # create our table positions for the cpu and player
   position(layout.cpu_table, 1, 0, term.orange)

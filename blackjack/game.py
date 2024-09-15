@@ -88,11 +88,11 @@ def blackjack_start(deck):
   Main blackjack function, each run is one game
   """
 
-  ##########################
-  # Step 1 Draw our Intro #
-  ##########################
-  # intro()
-  # instructions()
+  ########################
+  #Step 1 Draw our Intro#
+  ########################
+  intro()
+  instructions()
 
   # set our player and dealers cards
   player_card_data = [] # Data containing the card objects
@@ -120,7 +120,7 @@ def blackjack_start(deck):
         player_score -= 10
 
 #testing
-  display_cards(player_cards)
+  # display_cards(player_cards)
 
 
   
