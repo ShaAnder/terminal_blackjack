@@ -76,19 +76,29 @@ def blackjack_start(deck):
   player_score = 0
   dealer_score = 0
 
-  # Now we want to call a function to draw a card and return it, 
-  # removing that card from the deck in the process
+  # while loop to do our initial card drawing
+  # i to keep track of the loops
+  i = 0
   while len(player_card_data) < 2:
+    # draw our player cards
     draw_card(deck, player_card_data, player_cards, False)
-  
+    # update our player score
+    player_score += player_card_data[i].card_value
+    # increase count to get correct scores
+    i+= 1
+    # next we need to account for aces
+    if len(player_card_data) == 2:
+      if player_card_data[0].card_value == 11 and player_card_data[1].card_value == 11:
+        player_card_data[0] = 1
+        player_score -= 10
+
+    print(player_score)
 
 
 
 
 
-
-
-#testing
+# testing
   for i in range(len(player_cards)):
     print(player_cards[i])
     print(player_card_data[i])
