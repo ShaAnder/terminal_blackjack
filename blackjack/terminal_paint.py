@@ -46,9 +46,9 @@ def intro():
   clear()
   # gets every line in the logo, splits it and then prints / colors it
   for line in layout.game_heading.split("\n"):
-    print(term.orange + term.center(line))
+    print(term.darkorange1 + term.center(line))
   for line in layout.instructions_cards.split("\n"):
-    print(term.orange + term.center(line))
+    print(term.darkorange1 + term.center(line))
   # using our coordinate function, print our start text
   position(term.center("press any key to continue"), 0, 10, term.black_on_orange)
   # check for inputs, then clear the screen, 
@@ -66,11 +66,11 @@ def instructions():
   """
   clear()
   for line in layout.welcome_heading.split("\n"):
-    print(term.orange + term.center(line))
+    print(term.darkorange1 + term.center(line))
   for line in layout.instructions_text.split("\n"):
-    print(term.orange + term.center(line))
+    print(term.darkorange1 + term.center(line))
   for line in layout.border.split("\n"):
-    print(term.orange + term.center(line))
+    print(term.darkorange1 + term.center(line))
   position(term.center(layout.house_text), 0, 39, term.black_on_orange)
   position(term.center("press to begin the game"), 0, 40, term.black_on_orange)
   with term.cbreak(), term.hidden_cursor():
@@ -92,5 +92,5 @@ def board(*display_cards):
 
 def table_setup():
   # create our table positions for the cpu and player
-  position(layout.cpu_table, 1, 0, term.orange)
+  position(layout.cpu_table, 1, 0, term.darkorange1)
   position(layout.player_table, 1, 15, term.green)
