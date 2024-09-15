@@ -50,7 +50,7 @@ def intro():
   for line in layout.instructions_cards.split("\n"):
     print(term.white + term.center(line))
   # using our coordinate function, print our start text
-  position(term.center("press any key to continue"), 0, 30, term.black_on_orange)
+  position(term.center("press any key to continue"), 0, 25, term.black_on_orange)
   # check for inputs, then clear the screen, 
   # break -> reads keystroke immediately after it's pressed
   # hidden cursor -> hides cursor
