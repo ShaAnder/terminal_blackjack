@@ -219,10 +219,16 @@ def blackjack_start(deck):
 
   board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)
 
+  # First win condition we want to check if the dealer or the player has 21.
+  if dealer_score == 21:
+    pass
+  elif player_score == 21:
+    pass
+  else:
+    pass
+
+  # next we go into the second main phase of the game
+
+
   
 
-  # First win condition we want to check if the dealer or the player  has 21.
-  # In this case that means the player (or the dealer) has won, and should be declared
-
-  
-  

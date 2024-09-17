@@ -92,10 +92,10 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
   print(term.yellow + term.center(layout.player_hand))
   for line in player_cards:
     print(term.green + term.center(line))
-
   position(term.center("Press enter to continue..."), 0, 36, term.black_on_yellow)
   with term.cbreak(), term.hidden_cursor():
     term.inkey()
+  clear()
 
 def table_setup():
   # create our table positions for the cpu and player
