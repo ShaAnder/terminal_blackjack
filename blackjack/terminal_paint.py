@@ -84,12 +84,13 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
       display_cards (func): returned function for displaying the current cards
   """
   clear()
-  position
+  print(term.yellow + term.center(layout.border))
   for line in dealer_cards:
     print(term.white + term.center(line))
-  print(term.white + term.center(layout.scores.format(dealer_score, player_score))) 
+  print(term.yellow + term.center(layout.scores.format(dealer_score, player_score))) 
   for line in player_cards:
-    print(term.white + term.center(line))
+    print(term.green + term.center(line))
+  print(term.yellow + term.center(layout.border))
   with term.cbreak(), term.hidden_cursor():
     term.inkey()
   clear()
