@@ -78,22 +78,35 @@ def draw_card(deck, player_card_data, player_cards, hidden):
 
 def display_cards(cards):
   """
-  Takes the card array and splits it into lines for
-  printing side by side in the terminal
+  Sorts the card array into a new array for displaying the cards
+  side by side 
+
+  Example input / output: 
+  ["┌───────────────┐","│ 8             │","┌───────────────┐", "│ 7             │"]
+  ["┌───────────────┐┌───────────────┐", "│ 8             ││ 7             │"
 
   Args:
-      cards (list): the player or dealer card list for displaying cards
+      cards (list): the player or dealers cards
   """
   # get the lines for each card in the card list
   card_lines = [card.splitlines() for card in cards]
+  # get the max lines for however many lines are in the cards
   max_lines = max(len(lines) for lines in card_lines)
-
+  # new card array for containing our line cars
+  new_card = []
+  # loop through our max lines
   for i in range(max_lines):
+    # get our line we want to print (card1[line] + card2[line])
     line_to_print = ""
+    # loop through all our card lines
     for lines in card_lines:
+      # get the specific line line1, line2 (for each card)
       line = lines[i] if i < len(lines) else " " * len(lines[0])
-      line_to_print += line + " "
-    print(line_to_print)
+      # add that to our line to print
+      line_to_print += line
+    # append that to our array
+    new_card.append(line_to_print)
+  return new_card
 
 def blackjack_start(deck):
   """
@@ -116,25 +129,26 @@ def blackjack_start(deck):
   player_score = 0
   dealer_score = 0
 
-  #intial variable for our total cards
-  total_cards = 2
-
   # while loop to do our initial card drawing
   # i to keep track of the loops
   i = 0
-  while len(player_card_data) < total_cards:
+  while len(player_card_data) < 2:
     # draw our player cards
     draw_card(deck, player_card_data, player_cards, False)
     # update our player score
     player_score += player_card_data[i].card_value
 
     # next we need to account for aces
-    if len(player_card_data) == total_cards:
+    if len(player_card_data) == 2:
       if player_card_data[0].card_value == 11 and player_card_data[1].card_value == 11:
         player_card_data[0] = 1
         player_score -= 10
 
+    # we increment the loop so we get accurate scoring
+    i+=1
 
+  print(player_score)
+  board(display_cards(player_cards))
 
 
   
