@@ -47,12 +47,33 @@ def create_deck():
   deck = []
   # Loop for every type of suit
   for suit in suits:
-      # Loop for every type of card in a suit
-      for card in cards:
-          # Adding card to the deck
-          deck.append(Card(suits_values[suit], card, cards_values[card]))
+    # Loop for every type of card in a suit
+    for card in cards:
+      # Adding card to the deck
+      deck.append(Card(suits_values[suit], card, cards_values[card]))
 
   return deck
+
+def calculate_score(player_card_data):
+  """
+  Function that loops over the player_card_data and adds the score to a score array
+  the function also accounts for multiple aces placed into the array by checking if
+  there is already 11 in the array.
+  """
+  # get our player score
+  player_score = []
+  # loop over the player card data
+  for i in player_card_data:
+    #if 11 is already in the array add 1 instead (ace is 1 or 11)
+    if 11 in player_score:
+      player_score.append(1)
+    else: 
+      # else append the number
+      player_score.append(i.card_value)
+    # sum the player scores at the end
+    Sum = sum(player_score)
+  #return the score
+  return Sum
 
 
 def draw_card(deck, player_card_data, player_cards, hidden):
@@ -137,7 +158,6 @@ def blackjack_start(deck):
 
   # s here to loop our unique loop, could just pain screen after cards are drawn
   # but want it to be different to player cards
-
   s = 0
   #we want to do a quick while loop here to create the random intro cards
   while len(intro_card_data) < 2:
@@ -147,29 +167,43 @@ def blackjack_start(deck):
   # paint our intro (we also feed in a unique card list here so that
   # the blackjack screen has different card on every launch)
   intro(display_cards(intro_cards))
+
+  ##############################
+  #Step 2 Draw our Instructions#
+  ##############################
+
   instructions()
   clear()
+
+  ######################
+  #Step 3 Draw our Game#
+  ######################
 
   # while loop to do our initial card drawing
   # i to keep track of the loops
   i = 0
-  while len(player_card_data) < 2:
+  while len(player_card_data) < 3:
     # draw our player cards
     draw_card(deck, player_card_data, player_cards, False)
     # update our player score
-    player_score += player_card_data[i].card_value
+    # player_score += player_card_data[i].card_value
 
-    # next we need to account for aces
-    if len(player_card_data) == 2:
-      if player_card_data[0].card_value == 11 and player_card_data[1].card_value == 11:
-        player_card_data[0] = 1
-        player_score -= 10
+    # # next we need to account for aces
+    # if len(player_card_data) == 2:
+    #   if player_card_data[0].card_value == 11 and player_card_data[1].card_value == 11:
+    #     player_card_data[0] = 1
+    #     player_score -= 10
 
+
+    # Randomly drawing dealer cards
+    draw_card(deck, dealer_card_data, dealer_cards, True)
+    # Updating Dealer Score
+    dealer_score += dealer_card_data[i].card_value
     # we increment the loop so we get accurate scoring
     i+=1
-
-  print(player_score)
-  board(display_cards(player_cards))
+  print(player_card_data)
+  calculate_score(player_card_data)
+  # board(display_cards(player_cards))
 
 
   
