@@ -84,7 +84,6 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
       display_cards (func): returned function for displaying the current cards
   """
   clear()
-
   print(term.yellow + term.center(layout.border))
   print(term.yellow + term.center(layout.dealer_hand))
   for line in dealer_cards:

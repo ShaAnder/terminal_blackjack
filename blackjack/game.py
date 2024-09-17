@@ -149,6 +149,10 @@ def blackjack_start(deck):
   # set our player and dealers scores
   player_score = 0
   dealer_score = 0
+  # we want to have a hidden dealer score for when we display the dealer
+  # score, so the player cannot guess what the dealers hidden first card is.
+  # the dealer's real score will keep track of if the dealer goes bust or not.
+  dealer_score_hidden = 0
 
   #######################
   #Step 1 Draw our Intro#
@@ -177,6 +181,8 @@ def blackjack_start(deck):
   #Step 3 Draw our Game#
   ######################
 
+  ### STEP 3.1 - DRAW CARDS ###
+
   # while loop to do our initial card drawing
   # i to keep track of the loops
   i = 0
@@ -188,14 +194,29 @@ def blackjack_start(deck):
       player_score += calculate_score(player_card_data)
 
     # Randomly drawing dealer cards, we want one to be hidden and the rest displayed
-    # so for the first loop we will
-    draw_card(deck, dealer_card_data, dealer_cards, True)
+    # so for the first loop we will call it with true, and with the second we will call
+    #  it with false
+    if i == 0:
+      draw_card(deck, dealer_card_data, dealer_cards, True)
+    else: 
+      draw_card(deck, dealer_card_data, dealer_cards, False)
     # Updating Dealer Score, we want it to stay hidden so we
     
     # we increment the loop so we get accurate scoring
     i+=1
-  player_score = calculate_score(player_card_data)
-  board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_score, player_score = player_score)
 
+  ### STEP 3.2 - CALCULATE OUR SCORE ###
+  
+  # player score calculated normally
+  player_score = calculate_score(player_card_data)
+  # dealer score calculated normally
+  dealer_score = calculate_score(dealer_card_data)
+  # dealer *hidden* score for displaying calculated, by removing the
+  # second card onward from the total, this is only needed once, as
+  # whenever we update the score from now on, we can just update both
+  # values with the new card value
+  dealer_hidden_score = dealer_score - dealer_card_data[0].card_value
+
+  board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)
 
   
