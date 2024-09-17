@@ -90,30 +90,39 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
   print(term.yellow + term.center(layout.player_hand))
   for line in player_cards:
     print(term.green + term.center(line))
+  inp = input("Type H to Hit or S to Stay: ")
+  position(term.center(inp), 0, 35, term.black_on_yellow)
+  return inp
+ 
 
+def get_user_input(val):
+  """
+  Takes the value entered, passes it into the validatior, checks to see if it is either 
+  "Hit" or "Stay" then returns that string to tell the program what to do next
 
-def get_user_instructions(value):
+  Args: 
+    val (str): H or S value for input validation
   """
-  Gets the user instructions from the terminal
-  """
-  position(term.center(input("Type H to Hit or S to Stay: ")), 0, 35, term.black_on_yellow)
+  error_msg = ""
   with term.cbreak(), term.hidden_cursor():
     while val.upper() != "H" or val.upper() != "S":
-      val = ""
-      error_msg = ""
+      position(term.center(error_msg), 0, 36, term.black_on_yellow)
       try: 
         val = str(val)
       except ValueError:
-        error_message = "Please enter a valid Option"
-      finally:
+        error_msg = "Please enter a valid option..."
+      except val.len() < 1 or val.len() > 1:
+        error_msg = "Answer cannot be empty, please enter an option..."
+      else:
         if val == "H":
-          #we hit and give the user an additional card
-          pass 
+          print("you hit")
+          clear()
+          return "hit"
         elif val == "S":
-          # we stand to calculate score / dealer draw
-          pass
-        else:
-          pass 
+          print("you stayed")
+          clear()
+          return "stay"
+
 
 def table_setup():
   # create our table positions for the cpu and player
