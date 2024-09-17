@@ -75,7 +75,7 @@ def instructions():
     term.inkey()
   clear()
 
-def board(display_cards):
+def board(dealer_cards, player_cards, dealer_score, player_score):
   """
   Populate the terminal window with the dynamic cards we created in game.py
 
@@ -83,7 +83,11 @@ def board(display_cards):
       display_cards (func): returned function for displaying the current cards
   """
   clear()
-  for line in display_cards:
+  print(term.white + term.center(layout.cpu_table.format(dealer_score, 1, 2))) 
+  for line in dealer_cards:
+    print(term.white + term.center(line))
+  print(term.white + term.center(layout.cpu_table.format(player_score, 1, 2))) 
+  for line in player_cards:
     print(term.white + term.center(line))
   with term.cbreak(), term.hidden_cursor():
     term.inkey()

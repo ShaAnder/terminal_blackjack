@@ -75,7 +75,6 @@ def calculate_score(player_card_data):
   #return the score
   return Sum
 
-
 def draw_card(deck, player_card_data, player_cards, hidden):
   """
   Draws A card, converts it and then appends the card data and card to
@@ -96,7 +95,6 @@ def draw_card(deck, player_card_data, player_cards, hidden):
   # append to both player card and player card data
   player_card_data.append(card)
   player_cards.append(converted_card)
-
 
 def display_cards(cards):
   """
@@ -182,28 +180,22 @@ def blackjack_start(deck):
   # while loop to do our initial card drawing
   # i to keep track of the loops
   i = 0
-  while len(player_card_data) < 3:
+  while len(player_card_data) < 2:
     # draw our player cards
     draw_card(deck, player_card_data, player_cards, False)
     # update our player score
-    # player_score += player_card_data[i].card_value
+    if len(player_card_data) == 2:
+      player_score += calculate_score(player_card_data)
 
-    # # next we need to account for aces
-    # if len(player_card_data) == 2:
-    #   if player_card_data[0].card_value == 11 and player_card_data[1].card_value == 11:
-    #     player_card_data[0] = 1
-    #     player_score -= 10
-
-
-    # Randomly drawing dealer cards
+    # Randomly drawing dealer cards, we want one to be hidden and the rest displayed
+    # so for the first loop we will
     draw_card(deck, dealer_card_data, dealer_cards, True)
-    # Updating Dealer Score
-    dealer_score += dealer_card_data[i].card_value
+    # Updating Dealer Score, we want it to stay hidden so we
+    
     # we increment the loop so we get accurate scoring
     i+=1
-  print(player_card_data)
-  calculate_score(player_card_data)
-  # board(display_cards(player_cards))
+  player_score = calculate_score(player_card_data)
+  board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_score, player_score = player_score)
 
 
   

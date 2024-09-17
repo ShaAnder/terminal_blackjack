@@ -8,7 +8,6 @@ Main card class, this creates our blackjack card to append to the cards list
 
 # we want random to generate random cards ect
 import random
-from .layout import hidden_card
 
 class Card:
   """
@@ -39,16 +38,24 @@ class Card:
     right_value_format = "│        {:>2} │"  # Right-align with width 2
     suit = "│     {}     │"
 
-    # Create our card template of 11 entries
-    card_rows = [top, base, base, base, base, base, base, base, bottom]
-    # Apply string formatting to the row based on the card value
-    card_rows[1] = left_value_format.format(card.value)
-    card_rows[7] = right_value_format.format(card.value) 
-    # Format the suit
-    card_rows[4] = suit.format(card.suit)
-    # If hidden (dealer card) return the hidden card from layout
+    if not hidden: 
+      # Create our card template of 11 entries
+      card_rows = [top, base, base, base, base, base, base, base, bottom]
+      # Apply string formatting to the row based on the card value
+      card_rows[1] = left_value_format.format(card.value)
+      card_rows[7] = right_value_format.format(card.value) 
+      # Format the suit
+      card_rows[4] = suit.format(card.suit)
+      # If hidden (dealer card) return the hidden card from layout
     if hidden:
-        card_rows = hidden_card.split("\n")
+              # Create our card template of 11 entries
+      card_rows = [top, base, base, base, base, base, base, base, bottom]
+      # Apply string formatting to the row based on the card value
+      card_rows[1] = left_value_format.format("?")
+      card_rows[7] = right_value_format.format("?") 
+      # Format the suit
+      card_rows[4] = suit.format("?")
+      # If hidden (dealer card) return the hidden card from layout
     # else return new card joined into a single entity
     return "\n".join(card_rows)
 

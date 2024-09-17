@@ -64,31 +64,16 @@ instructions_cards = """
 
 house_text = "And remember the house always wins..."
 
-# this is an example card, it will be dynamically created via a function and
-# inserted into a list for reading later
-hidden_card = """
-┌───────────────┐
-│ ?             │
-│               │
-│               │
-│               │
-│       ?       │
-│               │
-│               │
-│               │
-│             ? │
-└───────────────┘                                                                   
-"""
 
 cpu_table = """
 ───────────────────────────────────────────────────────────────────────────────
-CPU TOTAL:
+CPU TOTAL: {:<2}
 ───────────────────────────────────────────────────────────────────────────────
 """
 
 player_table = """
 ───────────────────────────────────────────────────────────────────────────────
-PLAYER TOTAL:
+PLAYER TOTAL: {:<2}
 ───────────────────────────────────────────────────────────────────────────────
 """
 
