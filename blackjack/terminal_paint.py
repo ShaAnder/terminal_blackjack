@@ -19,6 +19,7 @@ from blackjack import layout
 # now create a new terminal
 term = Terminal()
 
+print (term.height, term.width)
 def position(text, xcoords, ycoords, color):
   """
   Gets our position on the terminal for inserting objects.
@@ -46,11 +47,11 @@ def intro(display_cards):
   clear()
   # gets every line in the logo, splits it and then prints / colors it
   for line in layout.game_heading.split("\n"):
-    print(term.white + term.center(line))
+    print(term.yellow + term.center(line))
   for l in display_cards:
-    print(term.white + term.center(l))
+    print(term.yellow + term.center(l))
   # using our coordinate function, print our start text
-  position(term.center("press any key to continue"), 0, 20, term.black_on_white)
+  position(term.center("A game of wits and chance, Press any key to continue"), 0, 19, term.black_on_yellow)
   # check for inputs, then clear the screen, 
   # break -> reads keystroke immediately after it's pressed
   # hidden cursor -> hides cursor
@@ -66,11 +67,11 @@ def instructions():
   """
   clear()
   for line in layout.welcome_heading.split("\n"):
-    print(term.white + term.center(line))
+    print(term.yellow + term.center(line))
   for line in layout.instructions_text.split("\n"):
     print(term.white + term.center(line))
-  position(term.center(layout.house_text), 0, 19, term.black_on_white)
-  position(term.center("press to begin the game"), 0, 20, term.black_on_white)
+  position(term.center(layout.house_text), 0, 18, term.black_on_yellow)
+  position(term.center("Press any key begin the game"), 0, 19, term.black_on_yellow)
   with term.cbreak(), term.hidden_cursor():
     term.inkey()
   clear()

@@ -130,7 +130,7 @@ def display_cards(cards):
 
 def blackjack_start(deck):
   """
-  Main blackjack function, each run is one game
+  Main blackjack function, each run is one game.
   """
 
   #####################
