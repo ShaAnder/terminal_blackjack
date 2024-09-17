@@ -76,9 +76,9 @@ border = """
 """
 
 player_hand = """
-PLAYER HAND:
+   PLAYER HAND:
 """
 
 dealer_hand = """
-DEALER HAND:
+   DEALER HAND:
 """
