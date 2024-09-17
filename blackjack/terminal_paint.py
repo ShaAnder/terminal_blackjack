@@ -86,7 +86,7 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
   clear()
   print(term.yellow + term.center(layout.border))
   for line in dealer_cards:
-    print(term.white + term.center(line))
+    print(term.yellow + term.center(line))
   print(term.yellow + term.center(layout.scores.format(dealer_score, player_score))) 
   for line in player_cards:
     print(term.green + term.center(line))
