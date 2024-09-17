@@ -230,5 +230,5 @@ def blackjack_start(deck):
   # next we go into the second main phase of the game
 
 
-  
+    
 

@@ -83,8 +83,6 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
   Args:
       display_cards (func): returned function for displaying the current cards
   """
-  clear()
-
   print(term.yellow + term.center(layout.dealer_hand))
   for line in dealer_cards:
     print(term.yellow + term.center(line))
@@ -92,10 +90,30 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
   print(term.yellow + term.center(layout.player_hand))
   for line in player_cards:
     print(term.green + term.center(line))
-  position(term.center("Press enter to continue..."), 0, 36, term.black_on_yellow)
+
+
+def get_user_instructions(value):
+  """
+  Gets the user instructions from the terminal
+  """
+  position(term.center(input("Type H to Hit or S to Stay: ")), 0, 35, term.black_on_yellow)
   with term.cbreak(), term.hidden_cursor():
-    term.inkey()
-  clear()
+    while val.upper() != "H" or val.upper() != "S":
+      val = ""
+      error_msg = ""
+      try: 
+        val = str(val)
+      except ValueError:
+        error_message = "Please enter a valid Option"
+      finally:
+        if val == "H":
+          #we hit and give the user an additional card
+          pass 
+        elif val == "S":
+          # we stand to calculate score / dealer draw
+          pass
+        else:
+          pass 
 
 def table_setup():
   # create our table positions for the cpu and player
