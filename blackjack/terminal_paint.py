@@ -86,7 +86,7 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
   clear()
   for line in dealer_cards:
     print(term.white + term.center(line))
-  print(term.white + term.center(layout.scores.format(player_score, 1, 2))) 
+  print(term.white + term.center(layout.scores.format(cpu_score, player_score))) 
   for line in player_cards:
     print(term.white + term.center(line))
   with term.cbreak(), term.hidden_cursor():
