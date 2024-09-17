@@ -84,7 +84,7 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
       display_cards (func): returned function for displaying the current cards
   """
   clear()
-  print(term.yellow + term.center(layout.border))
+
   print(term.yellow + term.center(layout.dealer_hand))
   for line in dealer_cards:
     print(term.yellow + term.center(line))
@@ -92,10 +92,10 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
   print(term.yellow + term.center(layout.player_hand))
   for line in player_cards:
     print(term.green + term.center(line))
-  print(term.yellow + term.center(layout.border))
+
+  position(term.center("Press enter to continue..."), 0, 36, term.black_on_yellow)
   with term.cbreak(), term.hidden_cursor():
     term.inkey()
-  clear()
 
 def table_setup():
   # create our table positions for the cpu and player
