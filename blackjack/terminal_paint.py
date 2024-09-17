@@ -38,7 +38,7 @@ def clear():
   """
   print(term.home + term.clear)
 
-def intro():
+def intro(display_cards):
   """
   Creates the intro screen using terminal paint.
   """
@@ -47,8 +47,8 @@ def intro():
   # gets every line in the logo, splits it and then prints / colors it
   for line in layout.game_heading.split("\n"):
     print(term.white + term.center(line))
-  for line in layout.instructions_cards.split("\n"):
-    print(term.white + term.center(line))
+  for l in display_cards:
+    print(term.white + term.center(l))
   # using our coordinate function, print our start text
   position(term.center("press any key to continue"), 0, 20, term.black_on_white)
   # check for inputs, then clear the screen, 

@@ -32,12 +32,12 @@ class Card:
     """
     # Card pieces - using string formatting we align and format
     # each variable space to 2 spaces, to account for single digita
-    top = "┌─────────────┐"
-    bottom = "└─────────────┘"
-    base = "│             │"
-    left_value_format = "│ {:<2}          │"  # Left-align with width 2
-    right_value_format = "│          {:>2} │"  # Right-align with width 2
-    suit = "│      {}      │"
+    top = "┌───────────┐"
+    bottom = "└───────────┘"
+    base = "│           │"
+    left_value_format = "│ {:<2}        │"  # Left-align with width 2
+    right_value_format = "│        {:>2} │"  # Right-align with width 2
+    suit = "│     {}     │"
 
     # Create our card template of 11 entries
     card_rows = [top, base, base, base, base, base, base, base, bottom]

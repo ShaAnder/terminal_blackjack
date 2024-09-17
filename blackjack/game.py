@@ -61,13 +61,14 @@ def draw_card(deck, player_card_data, player_cards, hidden):
   the users hand.
 
   Args:
-      deck (list): list (deck of cars)
+      deck (list): list (deck of cards)
       player_card_data (list): the card data of the player in question
       player_cards (list): The cards of the player in question
       hidden (Bool): Hidden T/F for card, if False Card face up, else hidden
   """
   # draw a card from the deck
   card = random.choice(deck)
+  # we don't want the cards to be removed if the cards are intro cards
   deck.remove(card)
   # convert the card to a readable format
   converted_card = Card.create_card(card, hidden)
@@ -113,21 +114,41 @@ def blackjack_start(deck):
   Main blackjack function, each run is one game
   """
 
-  ########################
-  #Step 1 Draw our Intro#
-  ########################
-  intro()
-  instructions()
-  clear()
+  #####################
+  #Setup Our Variables#
+  #####################
 
   # set our player and dealers cards
   player_card_data = [] # Data containing the card objects
   player_cards = [] # Actual cards for printing
+  # dealers cards
   dealer_card_data = []
   dealer_cards = []
+  # random cards for the intro
+  intro_card_data = []
+  intro_cards = []
   # set our player and dealers scores
   player_score = 0
   dealer_score = 0
+
+  #######################
+  #Step 1 Draw our Intro#
+  #######################
+
+  # s here to loop our unique loop, could just pain screen after cards are drawn
+  # but want it to be different to player cards
+
+  s = 0
+  #we want to do a quick while loop here to create the random intro cards
+  while len(intro_card_data) < 2:
+    draw_card(deck, intro_card_data, intro_cards, False)
+    s+= 1
+
+  # paint our intro (we also feed in a unique card list here so that
+  # the blackjack screen has different card on every launch)
+  intro(display_cards(intro_cards))
+  instructions()
+  clear()
 
   # while loop to do our initial card drawing
   # i to keep track of the loops
