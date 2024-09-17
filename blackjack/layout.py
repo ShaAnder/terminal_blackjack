@@ -65,13 +65,9 @@ instructions_cards = """
 house_text = "And remember the house always wins..."
 
 
-cpu_table = """
-CPU TOTAL: {:<2}
-"""
-
-player_table = """
+scores = """
 ───────────────────────────────────────────────────────────────────────────────
-PLAYER TOTAL: {:<2}
+CPU TOTAL: {:<2}                                            PLAYER TOTAL: {:<2}
 ───────────────────────────────────────────────────────────────────────────────
 """
 
