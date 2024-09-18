@@ -92,6 +92,7 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
     print(term.green + term.center(line))
   inp = input("Type H to Hit or S to Stay: ")
   position(term.center(inp), 0, 35, term.black_on_yellow)
+  clear()
   return inp
  
 
@@ -124,7 +125,41 @@ def get_user_input(val):
           return "stay"
 
 
-def table_setup():
-  # create our table positions for the cpu and player
-  position(layout.cpu_table, 1, 0, term.white)
-  position(layout.player_table, 1, 15, term.green)
+def status_message(condition, specific_condition):
+  """
+  Displays a detailed status message depending on the win condition, there
+  is only a win or a loss, so we split it into two main messages, with 
+  a subsection for each specific condition
+
+  Args:
+    condition (str): generalized condition -> player_wins / dealer_wins
+    specific_condition (str): specific_condition -> blackjack, bust -> tie
+    
+  """
+  if condition == "player_wins":
+    for line in layout.loss_heading.split("\n"):
+      print(term.yellow + term.center(line))
+    if specific_condition == "blackjack":
+      condition_message = "Blackjack! Congratulations on beating the house"
+      position(term.center(condition_message), 0, 34, term.yellow)
+    else:
+      condition_message = "The dealer is bust! Congratulations"
+      position(term.center(condition_message), 0, 34, term.yellow)
+  elif condition == "dealer_wins":
+    for line in layout.win_heading.split("\n"):
+      print(term.yellow + term.center(line))
+    if specific_condition == "blackjack":
+      condition_message = "Blackjack! The house wins... better luck next time"
+      position(term.center(condition_message), 0, 34, term.yellow)
+    elif specific_condition == "tie":
+      condition_message = "It's a tie! But the house always wins..."
+      position(term.center(condition_message), 0, 34, term.yellow)
+    else:
+      condition_message = "You went too high... Player bust! House Wins"
+      position(term.center(condition_message), 0, 34, term.yellow)
+  # regardless of the condition ask the player if they want to play again:
+  inp = input("Play again?")
+  position(term.center(inp), 0, 35, term.black_on_yellow)
+  clear()
+  return inp
+    

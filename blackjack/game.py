@@ -128,6 +128,7 @@ def display_cards(cards):
     new_card.append(line_to_print)
   return new_card
 
+
 def blackjack_start(deck):
   """
   Main blackjack function, each run is one game.
@@ -152,7 +153,7 @@ def blackjack_start(deck):
   # we want to have a hidden dealer score for when we display the dealer
   # score, so the player cannot guess what the dealers hidden first card is.
   # the dealer's real score will keep track of if the dealer goes bust or not.
-  dealer_score_hidden = 0
+  dealer_hidden_score = 0
 
   #######################
   #Step 1 Draw our Intro#
@@ -217,18 +218,24 @@ def blackjack_start(deck):
   # values with the new card value
   dealer_hidden_score = dealer_score - dealer_card_data[0].card_value
 
-  board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)
+  # create our board and get a user input from it
+  inp = board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)
 
-  # First win condition we want to check if the dealer or the player has 21.
-  if dealer_score == 21:
-    pass
-  elif player_score == 21:
-    pass
-  else:
-    pass
+  # 
 
   # next we go into the second main phase of the game
-
-
+  while True:
+    # user validation is done in get_user_input, and if correct command is given
+    # returns either hit or stay so we can do next phase of the game
+    user_choice = get_user_input(inp)
+    if user_choice == "hit":
+      # we draw again
+      draw_card(deck, player_card_data, player_cards, False)
+      # update our board
+      board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)
+      # recalc score
+      player_score = calculate_score(player_card_data)
+      # check if player is bust
+    elif user_choice == "stay":
+      pass
     
-
