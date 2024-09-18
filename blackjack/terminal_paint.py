@@ -117,7 +117,9 @@ def get_user_input(TERMINAL_INPUT, TERMINAL_STATUS):
         position(term.center(error_msg), TERMINAL_STATUS, 36, term.black_on_yellow)
       except target.len() < 1:
         error_msg = "Field cannot be blank, please enter H or S!"
-      if target == "H":
+      if target == "H" or target == "h":
+        print(term.move(TERMINAL_INPUT, 58+i)+inp)
+      elif target == "S" or target == "s":
         print(term.move(TERMINAL_INPUT, 58+i)+inp)
     print(term.move(TERMINAL_INPUT-1, 0))
     return target
