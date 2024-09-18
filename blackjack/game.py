@@ -56,10 +56,9 @@ def create_deck():
     for card in cards:
       # Adding card to the deck
       deck.append(Card(suits_values[suit], card, cards_values[card]))
-
   return deck
 
-def calculate_score(player_card_data):
+def calculate_score(card_data):
   """
   Function that loops over the player_card_data and adds the score to a score array
   the function also accounts for multiple aces placed into the array by checking if
@@ -68,7 +67,7 @@ def calculate_score(player_card_data):
   # get our player score
   score = []
   # loop over the player card data
-  for i in player_card_data:
+  for i in card_data:
     #if 11 is already in the array add 1 instead (ace is 1 or 11)
     if 11 in score:
       score.append(1)
@@ -274,32 +273,25 @@ def blackjack_start(deck):
   #######################
   
 
-  while player_score < 21 or dealer_score < 21:
+  while player_score < 21:
     ### Step 4.1 - Validate Input ###
     is_validated = validate_input(user_choice)
-    ### Step 4.2 - If the code is validated return our user choice to continue execution ### 
+    ### Step 4.2 - Check validation ### 
     if is_validated:
-      # if user_choice == "H":
-      #   # the user wants to hit
-      #   draw_card(deck, player_card_data, player_cards, False)
-      #   # recalculate score:
-      #   player_score = calculate_score(player_card_data)
-      #   # repaint the board
-      #   paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
-      # #if user does not want to hit then user wants to stand
-      # else:
-      #   # dealer hits
-      #   draw_card(deck, dealer_card_data, dealer_cards, False)
-      #   dealer_score = calculate_score(dealer_card_data)
-      #   dealer_hidden_score = dealer_score - dealer_card_data[0].card_value
-      #   # repaint the board
-      #   paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
-      clear()
-      print("code is valid")
-      break
-    else:
-      clear()
-      # user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
-      print("code is invalid")
-      break
-    
+      ### 4.3 - Player Chooses To Hit ###
+      if user_choice.upper() == "H" or user_choice == "h":
+        draw_card(deck, player_card_data, player_cards, False)
+        player_score += player_card_data[len(player_card_data) -1].card_value
+      ### 4.4 - Player Chooses To Stand ###
+      if user_choice.upper() == "S" or user_choice == "s":
+        draw_card(deck, dealer_card_data, dealer_cards, False)
+        dealer_score += dealer_card_data[len(dealer_card_data) -1].card_value
+        dealer_hidden_score = dealer_score - dealer_card_data[0].card_value
+      ### 4.5 - Regardless of choice, board is updated ###
+      user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+    else: 
+      # we also get the return from this container func from our user validation
+      user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+      # ERROR MESSAGE HERE FOR LATER
+      is_validated = validate_input(user_choice)
+
