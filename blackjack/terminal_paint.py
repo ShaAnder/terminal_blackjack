@@ -106,7 +106,6 @@ def get_user_input(terminal_row):
     terminal_row:  (int) -> number row where we want our input message to appear
     TERMINAL_STATUS:  (int) -> number row where we want our error message to appeaer
   """
-  
   print(term.move(terminal_row, 0) + term.black_on_yellow + term.center("Please type H to hit or S to Stay: ") + term.normal)
   print(term.move(terminal_row, 55)+ term.normal)
   with term.cbreak():
@@ -159,4 +158,5 @@ def loss(condition_message):
   position(term.center(condition_message), 0, 35, term.black_on_yellow) 
 
 def calculating():
-    position(term.center("Calculating..."), 0, 35, term.white_on_black)
+  clear()
+  position(term.center("Calculating..."), 0, 35, term.white_on_black)
