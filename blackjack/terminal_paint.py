@@ -158,5 +158,5 @@ def loss(condition_message):
       print(term.yellow + term.center(line))
   position(term.center(condition_message), 0, 35, term.yellow) 
 
-def calculating(terminal_row):
-    position(term.move(terminal_row, 0) + term.white_on_black + term.center("Calculating... ") + term.normal)
+def calculating():
+    position(term.center("Calculating..."), 0, 35, term.white_on_black)
