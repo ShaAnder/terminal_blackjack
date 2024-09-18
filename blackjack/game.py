@@ -133,6 +133,27 @@ def display_cards(cards):
     new_card.append(line_to_print)
   return new_card
 
+def paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, error_message):
+  """
+  Paints the board for the player to interact with and see
+
+  Args:
+    dealer_cards (arr): the dealers cards for printing
+    player_cards (arr): the players cards for printing
+    dealer_score (int): the dealers current HIDDEN score for displaying
+    player_score (int): the players current score for displaying
+  """
+
+  # we put all our board painting functionality here to ensure we can easily recall it as needed 
+  board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)     
+  user_choice = get_user_input(TERMINAL_INPUT)
+  if error_message != "":
+    system_message(TERMINAL_STATUS, error_message)
+  else:
+    pass
+  return user_choice
+
+  
 
 def blackjack_start(deck):
   """
@@ -159,6 +180,11 @@ def blackjack_start(deck):
   # score, so the player cannot guess what the dealers hidden first card is.
   # the dealer's real score will keep track of if the dealer goes bust or not.
   dealer_hidden_score = 0
+
+  # create an empty user input here so we can check it for validating
+  user_choice = ""
+  # create an error message up here for user validation
+  error_message = ""
 
   #######################
   #Step 1 Draw our Intro#
@@ -223,26 +249,24 @@ def blackjack_start(deck):
   # values with the new card value
   dealer_hidden_score = dealer_score - dealer_card_data[0].card_value
 
-  # create our board and get a user input from it
-  board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)
-  user_choice = get_user_input(TERMINAL_INPUT)
-  clear()
-  def validate_user_input(choice):
-    print(choice)
+  ### STEP 3.3 - PRINT OUR BOARD ###
+  
+  # we also get the return from this container func from our user validation
+  user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, error_message)
 
-  # # next we go into the second main phase of the game
-  # while True:
-  #   # user validation is done in get_user_input, and if correct command is given
-  #   # returns either hit or stay so we can do next phase of the game
-  #   user_choice = get_user_input(inp)
-  #   if user_choice == "hit":
-  #     # we draw again
-  #     draw_card(deck, player_card_data, player_cards, False)
-  #     # update our board
-  #     board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)
-  #     # recalc score
-  #     player_score = calculate_score(player_card_data)
-  #     # check if player is bust
-  #   elif user_choice == "stay":
-  #     pass
-    
+  ### STEP 3.4 - BEGIN GAME LOOP ###
+  
+  while True:
+    if user_choice != "" and len(user_choice) == 1:
+      print(user_choice)
+      break
+    elif user_choice == "":
+      # create a message for feedback
+      error_message = "Sorry the input cannot be blank, please input H for Hit or S for Stay..."
+      # set system message
+      paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, error_message)
+    elif len(user_choice) != 1:
+      error_message = "Incorrect amount of entries, please input H for Hit or S for Stay..."
+      paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, error_message)
+
+

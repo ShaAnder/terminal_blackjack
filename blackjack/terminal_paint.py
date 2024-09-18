@@ -81,7 +81,10 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
   Populate the terminal window with the dynamic cards we created in game.py
 
   Args:
-      display_cards (func): returned function for displaying the current cards
+      dealer_cards (arr): the dealers cards for printing
+      player_cards (arr): the players cards for printing
+      dealer_score (int): the dealers current HIDDEN score for displaying
+      player_score (int): the players current score for displaying
   """
   print(term.yellow + term.center(layout.dealer_hand))
   for line in dealer_cards:
@@ -94,55 +97,44 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
 
  
 
-def get_user_input(TERMINAL_INPUT):
+def get_user_input(terminal_row):
   """
   Takes the value entered, passes it into the validatior, checks to see if it is either 
   "Hit" or "Stay" then returns that string to tell the program what to do next
 
   Args:
-    TERMINAL_INPUT:  (int) -> number row where we want our input message to appear
+    terminal_row:  (int) -> number row where we want our input message to appear
     TERMINAL_STATUS:  (int) -> number row where we want our error message to appeaer
   """
   
-  print(term.move(TERMINAL_INPUT, 0) + term.black_on_yellow + term.center("Please type H to hit or S to Stay: ") + term.normal)
-  print(term.move(TERMINAL_INPUT, 55)+ term.normal)
+  print(term.move(terminal_row, 0) + term.black_on_yellow + term.center("Please type H to hit or S to Stay: ") + term.normal)
+  print(term.move(terminal_row, 55)+ term.normal)
   with term.cbreak():
     target, inp, i = "", term.inkey(), 1
-    print(term.move(TERMINAL_INPUT, 55 + i)+inp)
+    print(term.move(terminal_row, 55 + i)+inp)
     while inp.name != "KEY_ENTER":
       target += inp
       print(target)
       inp = term.inkey()
       i +=1
       if i == 1:
-        print(term.move(TERMINAL_INPUT, 55+i)+inp)
-    print(term.move(TERMINAL_INPUT-1, 0))
+        print(term.move(terminal_row, 55+i)+inp)
+    print(term.move(terminal_row-1, 0))
   
     return target
 
+def system_message(terminal_row, error_message):
+  """
+  Rerurns an error message painted on the screen for user feedback
 
-  # error_msg = ""
-  # with term.cbreak(), term.hidden_cursor():
-  #   while val.upper() != "H" or val.upper() != "S":
-  #     
-  #     try: 
-  #       val = str(val)
-  #     except ValueError:
-  #       error_msg = "Please enter a valid option..."
-  #     except val.len() < 1 or val.len() > 1:
-  #       error_msg = "Answer cannot be empty, please enter an option..."
-  #     else:
-  #       if val == "H":
-  #         print("you hit")
-  #         clear()
-  #         return "hit"
-  #       elif val == "S":
-  #         print("you stayed")
-  #         clear()
-  #         return "stay"
+  Args:
+    terminal_row (int): number of the row the system message will appear on
+    error_message (str): the message for the user
+  """
+  position(term.center(error_message), terminal_row, 40, term.yellow)
 
 
-def status_message(condition, specific_condition):
+def end_game_message(condition, specific_condition):
   """
   Displays a detailed status message depending on the win condition, there
   is only a win or a loss, so we split it into two main messages, with 
