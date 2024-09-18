@@ -52,6 +52,7 @@ def create_deck():
   deck = []
   # Loop for every type of suit
   for suit in suits:
+    cards = ["2", "4", "3", "A"]
     # Loop for every type of card in a suit
     for card in cards:
       # Adding card to the deck
@@ -272,23 +273,34 @@ def blackjack_start(deck):
   #Step 4 Begin Our Game#
   #######################
   
-
+  # the game should allow us to play until the user goes over 21 or the dealer goes over 17
+  # we set these conditions here in case the user get's a blackjack straight away
   while player_score < 21:
     ### Step 4.1 - Validate Input ###
     is_validated = validate_input(user_choice)
     ### Step 4.2 - Check validation ### 
     if is_validated:
       ### 4.3 - Player Chooses To Hit ###
+      # the player chooses to hit, they are allowed to hit until they go bust or stand
       if user_choice.upper() == "H" or user_choice == "h":
         draw_card(deck, player_card_data, player_cards, False)
         player_score += player_card_data[len(player_card_data) -1].card_value
       ### 4.4 - Player Chooses To Stand ###
+      # when the player chooses to stand, the dealer will draw UNTIL it reaches 17
       if user_choice.upper() == "S" or user_choice == "s":
-        draw_card(deck, dealer_card_data, dealer_cards, False)
-        dealer_score += dealer_card_data[len(dealer_card_data) -1].card_value
-        dealer_hidden_score = dealer_score - dealer_card_data[0].card_value
+        while dealer_score <= 17:
+          clear()
+          draw_card(deck, dealer_card_data, dealer_cards, False)
+          dealer_score += dealer_card_data[len(dealer_card_data) -1].card_value
+          dealer_hidden_score = dealer_score - dealer_card_data[0].card_value
+          # we want to keep the screen updating until the dealer gets over 17
+          board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+          # if the dealers score is over 17 break the loop
+          if dealer_score > 17:
+            break
       ### 4.5 - Regardless of choice, board is updated ###
       user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+      ### 4.6 - Display victory conditions - ###
     else: 
       # we also get the return from this container func from our user validation
       user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
