@@ -47,7 +47,7 @@ def intro(display_cards):
   clear()
   # gets every line in the logo, splits it and then prints / colors it
   for line in layout.game_heading.split("\n"):
-    print(term.yellow + term.center(line))
+    print(term.yellow + term.center(line) 10, 0)
   for l in display_cards:
     print(term.yellow + term.center(l))
   # using our coordinate function, print our start text
