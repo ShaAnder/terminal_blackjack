@@ -170,7 +170,7 @@ def validate_input(choice):
 
 def calculate_victor(player_win, message):
   sleep(0.5)
-  calculating(TERMINAL_ROW)
+  calculating(TERMINAL_INPUT)
   sleep(0.5)
   if player_win == "player":
     win(message)
