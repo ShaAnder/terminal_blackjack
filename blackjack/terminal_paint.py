@@ -123,15 +123,17 @@ def get_user_input(terminal_row):
   
     return target
 
-def system_message(terminal_row, error_message):
+def error_message(terminal_row, error_message):
   """
   Rerurns an error message painted on the screen for user feedback
 
   Args:
-    terminal_row (int): number of the row the system message will appear on
+    terminal_row (int): number of the row the error message will appear on
     error_message (str): the message for the user
   """
-  position(term.center(error_message), terminal_row, 40, term.yellow)
+  with term.location(terminal_row, 40):
+    print(term.yellow_on_black + term.center(error_message))
+
 
 
 def end_game_message(condition, specific_condition):

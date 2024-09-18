@@ -27,7 +27,7 @@ cards_values = {"A": 11, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9,
 
 # terminal lines for our input, error message, constants as they should never be changed
 TERMINAL_INPUT = 34
-TERMINAL_STATUS = 33
+TERMINAL_STATUS = 35
 
 
 ### --- FUNCTIONS --- ###
@@ -66,17 +66,17 @@ def calculate_score(player_card_data):
   there is already 11 in the array.
   """
   # get our player score
-  player_score = []
+  score = []
   # loop over the player card data
   for i in player_card_data:
     #if 11 is already in the array add 1 instead (ace is 1 or 11)
-    if 11 in player_score:
-      player_score.append(1)
+    if 11 in score:
+      score.append(1)
     else: 
       # else append the number
-      player_score.append(i.card_value)
+      score.append(i.card_value)
     # sum the player scores at the end
-    Sum = sum(player_score)
+    Sum = sum(score)
   #return the score
   return Sum
 
@@ -133,7 +133,7 @@ def display_cards(cards):
     new_card.append(line_to_print)
   return new_card
 
-def paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, error_message):
+def paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score):
   """
   Paints the board for the player to interact with and see
 
@@ -144,16 +144,31 @@ def paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, e
     player_score (int): the players current score for displaying
   """
 
-  # we put all our board painting functionality here to ensure we can easily recall it as needed 
+  ### 1. Paint Board ###
   board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)     
-  user_choice = get_user_input(TERMINAL_INPUT)
-  if error_message != "":
-    system_message(TERMINAL_STATUS, error_message)
-  else:
-    pass
-  return user_choice
-
   
+  ### 2. Get user Input ###
+  user_choice = get_user_input(TERMINAL_INPUT)
+
+  return user_choice
+  
+def validate_input(choice):
+  """
+  We want to return true if the user_choice is valid, if not we throw our error and return false
+  
+  Args:
+    user_choice (str): user choice, str if correct
+  """
+  # check if the user choice len is not 1 and if the choice is not H or S
+  if len(choice) != 1 or (choice.upper() != 'H' and choice.upper() != 'S'):
+    #throw our error message, setting y coord to be the line below our hit or stay
+    error_message(TERMINAL_STATUS, "Error: Please enter a valid input: H for Hit or S for Stay")
+    # return false so that loop does not return the correct choice
+    return False
+  # well if the input is valid, it must be what we want
+  else:
+    return True
+    
 
 def blackjack_start(deck):
   """
@@ -183,8 +198,8 @@ def blackjack_start(deck):
 
   # create an empty user input here so we can check it for validating
   user_choice = ""
-  # create an error message up here for user validation
-  error_message = ""
+
+  game_on = True
 
   #######################
   #Step 1 Draw our Intro#
@@ -252,23 +267,39 @@ def blackjack_start(deck):
   ### STEP 3.3 - PRINT OUR BOARD ###
   
   # we also get the return from this container func from our user validation
-  user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, error_message)
-
-  ### STEP 3.4 - BEGIN GAME LOOP ###
+  user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
   
-  while True:
-    if user_choice != "" and len(user_choice) == 1:
-      print(user_choice)
-      break
-    elif user_choice == "":
-      # create a message for feedback
-      error_message = "Sorry the input cannot be blank, please input H for Hit or S for Stay..."
-      clear()
-      paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, error_message)
-      error_message = ""
-    elif len(user_choice) != 1:
-      error_message = "Incorrect amount of entries, please input H for Hit or S for Stay..."
-      clear()
-      paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, error_message)
-      error_message = ""
+  #######################
+  #Step 4 Begin Our Game#
+  #######################
+  
 
+  while player_score < 21 or dealer_score < 21:
+    ### Step 4.1 - Validate Input ###
+    is_validated = validate_input(user_choice)
+    ### Step 4.2 - If the code is validated return our user choice to continue execution ### 
+    if is_validated:
+      # if user_choice == "H":
+      #   # the user wants to hit
+      #   draw_card(deck, player_card_data, player_cards, False)
+      #   # recalculate score:
+      #   player_score = calculate_score(player_card_data)
+      #   # repaint the board
+      #   paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+      # #if user does not want to hit then user wants to stand
+      # else:
+      #   # dealer hits
+      #   draw_card(deck, dealer_card_data, dealer_cards, False)
+      #   dealer_score = calculate_score(dealer_card_data)
+      #   dealer_hidden_score = dealer_score - dealer_card_data[0].card_value
+      #   # repaint the board
+      #   paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+      clear()
+      print("code is valid")
+      break
+    else:
+      clear()
+      # user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+      print("code is invalid")
+      break
+    
