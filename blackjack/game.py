@@ -167,8 +167,19 @@ def validate_input(choice):
     return False
   # well if the input is valid, it must be what we want
   else:
-    return True
-    
+    return True 
+
+def calculate_victor(player_win, message):
+  sleep(0.5)
+  # calculating()
+  sleep(0.5)
+  if player_win == "player":
+    win(message)
+  else:
+    loss(message)
+  sleep(2)
+  clear()
+  
 
 def blackjack_start(deck):
   """
@@ -255,7 +266,7 @@ def blackjack_start(deck):
   ### STEP 3.2 - CALCULATE OUR SCORE ###
   
   # player score calculated normally
-  player_score = calculate_score(player_card_data)
+  player_score = 21
   # dealer score calculated normally
   dealer_score = calculate_score(dealer_card_data)
   # dealer *hidden* score for displaying calculated, by removing the
@@ -275,35 +286,53 @@ def blackjack_start(deck):
   
   # the game should allow us to play until the user goes over 21 or the dealer goes over 17
   # we set these conditions here in case the user get's a blackjack straight away
-  while player_score < 21:
-    ### Step 4.1 - Validate Input ###
-    is_validated = validate_input(user_choice)
-    ### Step 4.2 - Check validation ### 
-    if is_validated:
-      ### 4.3 - Player Chooses To Hit ###
-      # the player chooses to hit, they are allowed to hit until they go bust or stand
-      if user_choice.upper() == "H" or user_choice == "h":
-        draw_card(deck, player_card_data, player_cards, False)
-        player_score += player_card_data[len(player_card_data) -1].card_value
-      ### 4.4 - Player Chooses To Stand ###
-      # when the player chooses to stand, the dealer will draw UNTIL it reaches 17
-      if user_choice.upper() == "S" or user_choice == "s":
-        while dealer_score <= 17:
-          clear()
-          draw_card(deck, dealer_card_data, dealer_cards, False)
-          dealer_score += dealer_card_data[len(dealer_card_data) -1].card_value
-          dealer_hidden_score = dealer_score - dealer_card_data[0].card_value
-          # we want to keep the screen updating until the dealer gets over 17
-          board(dealer_cards, player_cards, dealer_hidden_score, player_score)
-          # if the dealers score is over 17 break the loop
-          if dealer_score > 17:
-            break
-      ### 4.5 - Regardless of choice, board is updated ###
-      user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
-      ### 4.6 - Display victory conditions - ###
-    else: 
-      # we also get the return from this container func from our user validation
-      user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
-      # ERROR MESSAGE HERE FOR LATER
+  while player_score <= 21:
+    ### Step 4.0 - BLACKJACK ###
+    # first and foremost, even before we validate, we want to see if the player or dealer
+    # has a blackjack, if so they automatically win
+    clear()
+    if player_score == 21 and dealer_score == 21:
+      calculate_victor("dealer", "Double blackjack! However the house always wins...")
+      break
+    elif dealer_score == 21:
+      calculate_victor("dealer", "Dealer Blackjack! Better luck next time!")
+      break
+    elif player_score == 21:
+      calculate_victor("player", "Player Blackjack! Congratulations!")
+      break
+    else:
+      clear()
+      ### Step 4.1 - Validate Input ###
       is_validated = validate_input(user_choice)
+      ### Step 4.2 - Check validation ### 
+      if is_validated:
+        ### 4.3 - Player Chooses To Hit ###
+        # the player chooses to hit, they are allowed to hit until they go bust or stand
+        if user_choice.upper() == "H" or user_choice == "h":
+          draw_card(deck, player_card_data, player_cards, False)
+          player_score += player_card_data[len(player_card_data) -1].card_value
+        ### 4.4 - Player Chooses To Stand ###
+        # when the player chooses to stand, the dealer will draw UNTIL it reaches 17
+        if user_choice.upper() == "S" or user_choice == "s":
+          while dealer_score <= 17:
+            clear()
+            draw_card(deck, dealer_card_data, dealer_cards, False)
+            dealer_score += dealer_card_data[len(dealer_card_data) -1].card_value
+            dealer_hidden_score = dealer_score - dealer_card_data[0].card_value
+            # we want to keep the screen updating until the dealer gets over 17
+            board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+            # if the dealers score is over 17 break the loop
+            if dealer_score >= 17:
+              ## 4.6 - Display victory conditions - ###
+              # if the player has finished hitting and the dealer has finished drawing we should run our victory conditions here
+              pass
+
+        ### 4.5 - Regardless of choice, board is updated ###
+        user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+  
+      else: 
+        # we also get the return from this container func from our user validation
+        user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+        # ERROR MESSAGE HERE FOR LATER
+        is_validated = validate_input(user_choice)
 

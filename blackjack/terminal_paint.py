@@ -134,43 +134,26 @@ def error_message(terminal_row, error_message):
   with term.location(terminal_row, 40):
     print(term.yellow_on_black + term.center(error_message))
 
-
-
-def end_game_message(condition, specific_condition):
+def win(condition_message):
   """
-  Displays a detailed status message depending on the win condition, there
-  is only a win or a loss, so we split it into two main messages, with 
-  a subsection for each specific condition
+  Rerurns an error message painted on the screen for user feedback
 
   Args:
-    condition (str): generalized condition -> player_wins / dealer_wins
-    specific_condition (str): specific_condition -> blackjack, bust -> tie
-    
+    error_message (str): the message for the user
   """
-  if condition == "player_wins":
-    for line in layout.loss_heading.split("\n"):
+  for line in layout.win_heading.split("\n"):
       print(term.yellow + term.center(line))
-    if specific_condition == "blackjack":
-      condition_message = "Blackjack! Congratulations on beating the house"
-      position(term.center(condition_message), 0, 34, term.yellow)
-    else:
-      condition_message = "The dealer is bust! Congratulations"
-      position(term.center(condition_message), 0, 34, term.yellow)
-  elif condition == "dealer_wins":
-    for line in layout.win_heading.split("\n"):
+  position(term.center(condition_message), 0, 25, term.yellow) 
+  # Ask player to play again
+
+
+def loss(condition_message):
+  """
+  Clears and prints the loss scene with the custom message
+
+  Args:
+    error_message (str): the message for the user
+  """
+  for line in layout.loss_heading.split("\n"):
       print(term.yellow + term.center(line))
-    if specific_condition == "blackjack":
-      condition_message = "Blackjack! The house wins... better luck next time"
-      position(term.center(condition_message), 0, 34, term.yellow)
-    elif specific_condition == "tie":
-      condition_message = "It's a tie! But the house always wins..."
-      position(term.center(condition_message), 0, 34, term.yellow)
-    else:
-      condition_message = "You went too high... Player bust! House Wins"
-      position(term.center(condition_message), 0, 34, term.yellow)
-  # regardless of the condition ask the player if they want to play again:
-  inp = input("Play again?")
-  position(term.center(inp), 0, 35, term.black_on_yellow)
-  clear()
-  return inp
-    
+  position(term.center(condition_message), 0, 25, term.yellow) 
