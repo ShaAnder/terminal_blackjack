@@ -109,7 +109,7 @@ def get_user_input(TERMINAL_INPUT):
   with term.cbreak():
     target, inp, i = "", term.inkey(), 1
     print(term.move(TERMINAL_INPUT, 55 + i)+inp)
-    while inp.name != "KEY_ENTER" and i < 1:
+    while inp.name != "KEY_ENTER":
       target += inp
       print(target)
       inp = term.inkey()
