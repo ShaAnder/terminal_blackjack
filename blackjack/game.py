@@ -289,7 +289,6 @@ def blackjack_start(deck):
     ### Step 4.0 - BLACKJACK ###
     # first and foremost, even before we validate, we want to see if the player or dealer
     # has a blackjack, if so they automatically win
-    clear()
     if player_score == 21 and dealer_score == 21:
       calculate_victor("dealer", "Double blackjack! However the house always wins...")
       break

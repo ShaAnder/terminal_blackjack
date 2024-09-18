@@ -86,7 +86,7 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
       dealer_score (int): the dealers current HIDDEN score for displaying
       player_score (int): the players current score for displaying
   """
-  clear()
+
   print(term.orange + term.center(layout.dealer_hand))
   for line in dealer_cards:
     print(term.orange + term.center(line))
@@ -143,7 +143,7 @@ def win(condition_message):
   """
   for line in layout.win_heading.split("\n"):
       print(term.yellow + term.center(line))
-  position(term.center(condition_message), 0, 35, term.yellow) 
+  position(term.center(condition_message), 0, 35, term.black_on_yellow) 
   # Ask player to play again
 
 
@@ -156,7 +156,7 @@ def loss(condition_message):
   """
   for line in layout.loss_heading.split("\n"):
       print(term.yellow + term.center(line))
-  position(term.center(condition_message), 0, 35, term.yellow) 
+  position(term.center(condition_message), 0, 35, term.black_on_yellow) 
 
 def calculating():
     position(term.center("Calculating..."), 0, 35, term.white_on_black)
