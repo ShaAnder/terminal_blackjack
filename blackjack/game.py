@@ -263,10 +263,12 @@ def blackjack_start(deck):
     elif user_choice == "":
       # create a message for feedback
       error_message = "Sorry the input cannot be blank, please input H for Hit or S for Stay..."
-      # set system message
+      clear()
       paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, error_message)
+      error_message = ""
     elif len(user_choice) != 1:
       error_message = "Incorrect amount of entries, please input H for Hit or S for Stay..."
+      clear()
       paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, error_message)
-
+      error_message = ""
 
