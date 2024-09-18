@@ -25,6 +25,11 @@ suits_values = {"Spades":"\u2664", "Hearts":"\u2661", "Clubs": "\u2667", "Diamon
 cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
 cards_values = {"A": 11, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "J":10, "Q":10, "K":10}
 
+# terminal lines for our input, error message, constants as they should never be changed
+TERMINAL_INPUT = 35
+TERMINAL_STATUS = 36
+
+
 ### --- FUNCTIONS --- ###
 
 def clear():
@@ -219,23 +224,23 @@ def blackjack_start(deck):
   dealer_hidden_score = dealer_score - dealer_card_data[0].card_value
 
   # create our board and get a user input from it
-  inp = board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)
-
+  board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)
+  get_user_input(TERMINAL_INPUT, TERMINAL_STATUS)
   # 
 
-  # next we go into the second main phase of the game
-  while True:
-    # user validation is done in get_user_input, and if correct command is given
-    # returns either hit or stay so we can do next phase of the game
-    user_choice = get_user_input(inp)
-    if user_choice == "hit":
-      # we draw again
-      draw_card(deck, player_card_data, player_cards, False)
-      # update our board
-      board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)
-      # recalc score
-      player_score = calculate_score(player_card_data)
-      # check if player is bust
-    elif user_choice == "stay":
-      pass
+  # # next we go into the second main phase of the game
+  # while True:
+  #   # user validation is done in get_user_input, and if correct command is given
+  #   # returns either hit or stay so we can do next phase of the game
+  #   user_choice = get_user_input(inp)
+  #   if user_choice == "hit":
+  #     # we draw again
+  #     draw_card(deck, player_card_data, player_cards, False)
+  #     # update our board
+  #     board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)
+  #     # recalc score
+  #     player_score = calculate_score(player_card_data)
+  #     # check if player is bust
+  #   elif user_choice == "stay":
+  #     pass
     

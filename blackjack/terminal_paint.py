@@ -90,39 +90,58 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
   print(term.yellow + term.center(layout.player_hand))
   for line in player_cards:
     print(term.green + term.center(line))
-  inp = input("Type H to Hit or S to Stay: ")
-  position(term.center(inp), 0, 35, term.black_on_yellow)
-  clear()
-  return inp
+  # clear()
+
  
 
-def get_user_input(val):
+def get_user_input(TERMINAL_INPUT, TERMINAL_STATUS):
   """
   Takes the value entered, passes it into the validatior, checks to see if it is either 
   "Hit" or "Stay" then returns that string to tell the program what to do next
 
-  Args: 
-    val (str): H or S value for input validation
+  Args:
+    TERMINAL_INPUT:  (int) -> number row where we want our input message to appear
+    TERMINAL_STATUS:  (int) -> number row where we want our error message to appeaer
   """
-  error_msg = ""
-  with term.cbreak(), term.hidden_cursor():
-    while val.upper() != "H" or val.upper() != "S":
-      position(term.center(error_msg), 0, 36, term.black_on_yellow)
-      try: 
-        val = str(val)
+  
+  print(term.move(TERMINAL_INPUT, 0) + term.black_on_yellow + term.center("Please type H to hit or S to Stay: ") + term.normal)
+  print(term.move(TERMINAL_INPUT, 33)+ term.normal)
+  with term.cbreak():
+    target, inp, i = "", term.inkey(), 1
+    print(term.move(TERMINAL_INPUT,35 + i)+inp)
+    while inp.name != "KEY_ENTER":
+      try:
+        target = str(target)
       except ValueError:
-        error_msg = "Please enter a valid option..."
-      except val.len() < 1 or val.len() > 1:
-        error_msg = "Answer cannot be empty, please enter an option..."
-      else:
-        if val == "H":
-          print("you hit")
-          clear()
-          return "hit"
-        elif val == "S":
-          print("you stayed")
-          clear()
-          return "stay"
+        error_msg = "Incorrect value, please enter H or S!"
+        position(term.center(error_msg), TERMINAL_STATUS, 36, term.black_on_yellow)
+      except target.len() < 1:
+        error_msg = "Field cannot be blank, please enter H or S!"
+      if target == "H":
+        print(term.move(TERMINAL_INPUT, 35+i)+inp)
+    print(term.move(TERMINAL_INPUT-1, 0))
+    return target
+
+
+  # error_msg = ""
+  # with term.cbreak(), term.hidden_cursor():
+  #   while val.upper() != "H" or val.upper() != "S":
+  #     
+  #     try: 
+  #       val = str(val)
+  #     except ValueError:
+  #       error_msg = "Please enter a valid option..."
+  #     except val.len() < 1 or val.len() > 1:
+  #       error_msg = "Answer cannot be empty, please enter an option..."
+  #     else:
+  #       if val == "H":
+  #         print("you hit")
+  #         clear()
+  #         return "hit"
+  #       elif val == "S":
+  #         print("you stayed")
+  #         clear()
+  #         return "stay"
 
 
 def status_message(condition, specific_condition):
