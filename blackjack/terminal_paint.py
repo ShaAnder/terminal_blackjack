@@ -105,10 +105,10 @@ def get_user_input(TERMINAL_INPUT, TERMINAL_STATUS):
   """
   
   print(term.move(TERMINAL_INPUT, 0) + term.black_on_yellow + term.center("Please type H to hit or S to Stay: ") + term.normal)
-  print(term.move(TERMINAL_INPUT, 33)+ term.normal)
+  print(term.move(TERMINAL_INPUT, 58)+ term.normal)
   with term.cbreak():
     target, inp, i = "", term.inkey(), 1
-    print(term.move(TERMINAL_INPUT,35 + i)+inp)
+    print(term.move(TERMINAL_INPUT,58 + i)+inp)
     while inp.name != "KEY_ENTER":
       try:
         target = str(target)
@@ -118,7 +118,7 @@ def get_user_input(TERMINAL_INPUT, TERMINAL_STATUS):
       except target.len() < 1:
         error_msg = "Field cannot be blank, please enter H or S!"
       if target == "H":
-        print(term.move(TERMINAL_INPUT, 35+i)+inp)
+        print(term.move(TERMINAL_INPUT, 58+i)+inp)
     print(term.move(TERMINAL_INPUT-1, 0))
     return target
 
