@@ -170,7 +170,7 @@ def validate_input(choice):
 
 def calculate_victor(player_win, message):
   sleep(0.5)
-  # calculating()
+  calculating()
   sleep(0.5)
   if player_win == "player":
     win(message)
@@ -330,12 +330,18 @@ def blackjack_start(deck):
               ## 4.6 - Display victory conditions - ###
               # if the player has finished hitting and the dealer has finished drawing we should run our victory conditions here
               if player_score > dealer_score:
+                paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+                sleep(2)
                 calculate_victor("player", f"Your score is: {player_score} the dealers is: {dealer_score}, you win!")
                 break
               elif player_score < dealer_score:
+                paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+                sleep(2)
                 calculate_victor("dealer", f"Your score is: {player_score} the dealers is: {dealer_score}, you lose...")
                 break
               elif dealer_score > 21:
+                paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+                sleep(2)
                 calculate_victor("player", f"The dealers score is: {dealer_score}, they've gone bust! You win!")
                 break  
         ### 4.5 - Regardless of choice, board is updated ###

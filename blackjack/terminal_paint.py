@@ -51,7 +51,7 @@ def intro(display_cards):
   for l in display_cards:
     print(term.yellow + term.center(l))
   # using our coordinate function, print our start text
-  position(term.center("A game of wits and chance, Press any key to continue"), 0, 33, term.black_on_yellow)
+  position(term.center("A game of wits and chance, Press any key to continue"), 0, 34, term.black_on_yellow)
   # check for inputs, then clear the screen, 
   # break -> reads keystroke immediately after it's pressed
   # hidden cursor -> hides cursor
@@ -70,8 +70,8 @@ def instructions():
     print(term.yellow + term.center(line))
   for line in layout.instructions_text.split("\n"):
     print(term.white + term.center(line))
-  position(term.center(layout.house_text), 0, 32, term.black_on_yellow)
-  position(term.center("Press any key begin the game"), 0, 33, term.black_on_yellow)
+  position(term.center(layout.house_text), 0, 35, term.black_on_yellow)
+  position(term.center("Press any key begin the game"), 0, 34, term.black_on_yellow)
   with term.cbreak(), term.hidden_cursor():
     term.inkey()
   clear()
@@ -143,7 +143,7 @@ def win(condition_message):
   """
   for line in layout.win_heading.split("\n"):
       print(term.yellow + term.center(line))
-  position(term.center(condition_message), 0, 25, term.yellow) 
+  position(term.center(condition_message), 0, 35, term.yellow) 
   # Ask player to play again
 
 
@@ -156,4 +156,7 @@ def loss(condition_message):
   """
   for line in layout.loss_heading.split("\n"):
       print(term.yellow + term.center(line))
-  position(term.center(condition_message), 0, 25, term.yellow) 
+  position(term.center(condition_message), 0, 35, term.yellow) 
+
+def calculating():
+    position(term.move(terminal_row, 0) + term.white_on_black + term.center("Calculating... ") + term.normal)
