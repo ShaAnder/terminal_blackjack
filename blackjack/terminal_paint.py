@@ -47,7 +47,7 @@ def intro(display_cards):
   clear()
   # gets every line in the logo, splits it and then prints / colors it
   for line in layout.game_heading.split("\n"):
-    print(term.yellow + term.center(line) 10, 0)
+    print(term.yellow + term.center(line))
   for l in display_cards:
     print(term.yellow + term.center(l))
   # using our coordinate function, print our start text
@@ -70,8 +70,8 @@ def instructions():
     print(term.yellow + term.center(line))
   for line in layout.instructions_text.split("\n"):
     print(term.white + term.center(line))
-  position(term.center(layout.house_text), 0, 18, term.black_on_yellow)
-  position(term.center("Press any key begin the game"), 0, 19, term.black_on_yellow)
+  position(term.center(layout.house_text), 0, 32, term.black_on_yellow)
+  position(term.center("Press any key begin the game"), 0, 33, term.black_on_yellow)
   with term.cbreak(), term.hidden_cursor():
     term.inkey()
   clear()
@@ -87,11 +87,11 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
       player_score (int): the players current score for displaying
   """
   clear()
-  print(term.yellow + term.center(layout.dealer_hand))
+  print(term.orange + term.center(layout.dealer_hand))
   for line in dealer_cards:
-    print(term.yellow + term.center(line))
+    print(term.orange + term.center(line))
   print(term.yellow + term.center(layout.scores.format(dealer_score, player_score))) 
-  print(term.yellow + term.center(layout.player_hand))
+  print(term.green + term.center(layout.player_hand))
   for line in player_cards:
     print(term.green + term.center(line))
 

@@ -266,7 +266,7 @@ def blackjack_start(deck):
   ### STEP 3.2 - CALCULATE OUR SCORE ###
   
   # player score calculated normally
-  player_score = 21
+  player_score = calculate_score(player_card_data)
   # dealer score calculated normally
   dealer_score = calculate_score(dealer_card_data)
   # dealer *hidden* score for displaying calculated, by removing the
@@ -311,6 +311,10 @@ def blackjack_start(deck):
         if user_choice.upper() == "H" or user_choice == "h":
           draw_card(deck, player_card_data, player_cards, False)
           player_score += player_card_data[len(player_card_data) -1].card_value
+          # we put the check for player score being too much here, because player can accidently go over 21
+          if player_score > 21:
+            calculate_victor("dealer", f"Your score is: {player_score}, you've gone bust...")
+            break
         ### 4.4 - Player Chooses To Stand ###
         # when the player chooses to stand, the dealer will draw UNTIL it reaches 17
         if user_choice.upper() == "S" or user_choice == "s":
@@ -322,10 +326,19 @@ def blackjack_start(deck):
             # we want to keep the screen updating until the dealer gets over 17
             board(dealer_cards, player_cards, dealer_hidden_score, player_score)
             # if the dealers score is over 17 break the loop
-            if dealer_score >= 17:
+            if dealer_score >= 17 or player_score > 21:
+              clear()
               ## 4.6 - Display victory conditions - ###
               # if the player has finished hitting and the dealer has finished drawing we should run our victory conditions here
-              pass
+              if player_score > dealer_score:
+                calculate_victor("player", f"Your score is: {player_score} the dealers is: {dealer_score}, you win!")
+                break
+              elif player_score < dealer_score:
+                calculate_victor("dealer", f"Your score is: {player_score} the dealers is: {dealer_score}, you lose...")
+                break
+              elif dealer_score > 21:
+                calculate_victor("player", f"The dealers score is: {dealer_score}, they've gone bust! You win!")
+                break
 
         ### 4.5 - Regardless of choice, board is updated ###
         user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
