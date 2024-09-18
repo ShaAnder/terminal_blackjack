@@ -131,7 +131,7 @@ def error_message(terminal_row, error_message):
     terminal_row (int): number of the row the error message will appear on
     error_message (str): the message for the user
   """
-  with term.location(terminal_row, 0):
+  with term.location(terminal_row, 30):
     print(term.yellow_on_black + term.center(error_message))
 
 def win(condition_message):
