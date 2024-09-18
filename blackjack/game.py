@@ -52,7 +52,6 @@ def create_deck():
   deck = []
   # Loop for every type of suit
   for suit in suits:
-    cards = ["2", "4", "3", "A"]
     # Loop for every type of card in a suit
     for card in cards:
       # Adding card to the deck
@@ -338,8 +337,7 @@ def blackjack_start(deck):
                 break
               elif dealer_score > 21:
                 calculate_victor("player", f"The dealers score is: {dealer_score}, they've gone bust! You win!")
-                break
-
+                break  
         ### 4.5 - Regardless of choice, board is updated ###
         user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
   

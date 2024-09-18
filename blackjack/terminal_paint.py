@@ -51,7 +51,7 @@ def intro(display_cards):
   for l in display_cards:
     print(term.yellow + term.center(l))
   # using our coordinate function, print our start text
-  position(term.center("A game of wits and chance, Press any key to continue"), 0, 19, term.black_on_yellow)
+  position(term.center("A game of wits and chance, Press any key to continue"), 0, 33, term.black_on_yellow)
   # check for inputs, then clear the screen, 
   # break -> reads keystroke immediately after it's pressed
   # hidden cursor -> hides cursor
