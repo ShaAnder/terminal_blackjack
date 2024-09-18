@@ -225,7 +225,8 @@ def blackjack_start(deck):
 
   # create our board and get a user input from it
   board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)
-  get_user_input(TERMINAL_INPUT, TERMINAL_STATUS)
+  user_choice = get_user_input(TERMINAL_INPUT)
+  print(user_choice)
   # 
 
   # # next we go into the second main phase of the game

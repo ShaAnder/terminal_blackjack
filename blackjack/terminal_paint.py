@@ -94,7 +94,7 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
 
  
 
-def get_user_input(TERMINAL_INPUT, TERMINAL_STATUS):
+def get_user_input(TERMINAL_INPUT):
   """
   Takes the value entered, passes it into the validatior, checks to see if it is either 
   "Hit" or "Stay" then returns that string to tell the program what to do next
@@ -105,23 +105,19 @@ def get_user_input(TERMINAL_INPUT, TERMINAL_STATUS):
   """
   
   print(term.move(TERMINAL_INPUT, 0) + term.black_on_yellow + term.center("Please type H to hit or S to Stay: ") + term.normal)
-  print(term.move(TERMINAL_INPUT, 58)+ term.normal)
+  print(term.move(TERMINAL_INPUT, 55)+ term.normal)
   with term.cbreak():
     target, inp, i = "", term.inkey(), 1
-    print(term.move(TERMINAL_INPUT,58 + i)+inp)
-    while inp.name != "KEY_ENTER":
-      try:
-        target = str(target)
-      except ValueError:
-        error_msg = "Incorrect value, please enter H or S!"
-        position(term.center(error_msg), TERMINAL_STATUS, 36, term.black_on_yellow)
-      except target.len() < 1:
-        error_msg = "Field cannot be blank, please enter H or S!"
-      if target == "H" or target == "h":
-        print(term.move(TERMINAL_INPUT, 58+i)+inp)
-      elif target == "S" or target == "s":
-        print(term.move(TERMINAL_INPUT, 58+i)+inp)
+    print(term.move(TERMINAL_INPUT, 55 + i)+inp)
+    while inp.name != "KEY_ENTER" and i < 1:
+      target += inp
+      print(target)
+      inp = term.inkey()
+      i +=1
+      if i == 1:
+        print(term.move(TERMINAL_INPUT, 55+i)+inp)
     print(term.move(TERMINAL_INPUT-1, 0))
+  
     return target
 
 
