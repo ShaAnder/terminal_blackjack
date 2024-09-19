@@ -108,7 +108,7 @@ def draw_card(deck, card_data, owners_cards, hidden, delete):
   card_data.append(card)
   owners_cards.append(converted_card)
   # checks to see if the delete argument is True or not
-  if delete == True
+  if delete == True:
     deck.remove(card)
   else:
     pass
@@ -164,7 +164,7 @@ def paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, c
   ### 1. Clear our screen ###
   # firstly we want to clear our screen whenever the game board is updated
   clear()
-  
+
   ### 2. Paint Board ###
   # paint our board with the cards, and scores
   board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)     
@@ -187,12 +187,16 @@ def paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, c
   
 def validate_input(choice):
   """
-  We want to return true if the user_choice is valid, if not we throw our error and return false
+  Validates the input, and returns true if input is valid false if it is not
   
   Args:
     user_choice (str): user choice, str if correct
   """
-  # check if the user choice len is not 1 and if the choice is not H or S
+  
+  # I wanted to keep the user input validation as simple as possible, to ensure that the 
+  # user could not get any wrong ideas as well as not having to write an exhaustive loop
+  # to make sure that 
+
   if len(choice) != 1 or (choice.upper() != 'H' and choice.upper() != 'S'):
     #throw our error message, setting y coord to be the line below our hit or stay
     error_message(TERMINAL_STATUS, "Error: Please enter a valid input: H for Hit or S for Stay")
