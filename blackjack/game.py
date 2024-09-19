@@ -144,14 +144,14 @@ def display_cards(cards):
     new_card.append(line_to_print)
   return new_card
 
-def paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, condition):
+def paint_board(dealer_cards, player_cards, dealer_score, player_score, condition):
   """
   Paints the board for the player to interact with and see.
 
   Args:
     dealer_cards (arr): the dealers cards for printing
     player_cards (arr): the players cards for printing
-    dealer_score (int): the dealers current HIDDEN score for displaying
+    dealer_score (int): the dealers current score for displaying
     player_score (int): the players current score for displaying
     condition (str): the condition we pass in to determine what the board paints 
   """
@@ -166,7 +166,7 @@ def paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, c
 
   ### 2. Paint Board ###
   # paint our board with the cards, and scores
-  board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)     
+  board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_score, player_score = player_score)     
   
   ### 3. paint our message ###
   # paints our status / terminal / feedback message based on the various
@@ -243,12 +243,11 @@ def blackjack_start(deck):
   # set our player and dealers scores
   player_score = 0
   dealer_score = 0
-  # special dealer score for painting to the screen (removes the hidden card)
-  dealer_hidden_score = 0
 
   # create an empty user input here so we can check it for validating
   user_choice = ""
 
+  # set our game start variable
   game_on = True
 
   #######################
@@ -281,11 +280,6 @@ def blackjack_start(deck):
   player_score = calculate_score(player_card_data)
   # dealer score calculated normally
   dealer_score = calculate_score(dealer_card_data)
-  # dealer *hidden* score for displaying calculated, by removing the
-  # second card onward from the total, this is only needed once, as
-  # whenever we update the score from now on, we can just update both
-  # values with the new card value
-  dealer_hidden_score = dealer_score - dealer_card_data[0].card_value
 
   ##############################
   #Step 2 Draw our Instructions#
@@ -305,7 +299,7 @@ def blackjack_start(deck):
   ### STEP 3.3 - PRINT OUR BOARD ###
   
   # we also get the return from this container func from our user validation
-  user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+  user_choice = paint_board(dealer_cards, player_cards, dealer_score, player_score)
   
   #######################
   #Step 4 Begin Our Game#
@@ -348,35 +342,34 @@ def blackjack_start(deck):
             #let the dealer draw cards and calc score until it hit's 17
             draw_card(deck, dealer_card_data, dealer_cards, True)
             dealer_score += dealer_card_data[len(dealer_card_data) -1].card_value
-            dealer_hidden_score = dealer_score - dealer_card_data[0].card_value
             #once it hit's 17 or over. Repaint the board, Pass in the true statement
             if dealer_score >= 17:
-              paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, True)
+              paint_board(dealer_cards, player_cards, dealer_score, player_score, True)
               break
 
           ## 4.6 - Display victory conditions - ###
           # once user has finished hitting and dealer has also, we then check 
           if player_score > dealer_score:
-            paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+            paint_board(dealer_cards, player_cards, dealer_score, player_score)
             sleep(2)
             calculate_victor("player", f"Your score is: {player_score} the dealers is: {dealer_score}, you win!")
             break
           elif player_score < dealer_score:
-            paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+            paint_board(dealer_cards, player_cards, dealer_score, player_score)
             sleep(2)
             calculate_victor("dealer", f"Your score is: {player_score} the dealers is: {dealer_score}, you lose...")
             break
           elif dealer_score > 21:
-            paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+            paint_board(dealer_cards, player_cards, dealer_score, player_score)
             sleep(2)
             calculate_victor("player", f"The dealers score is: {dealer_score}, they've gone bust! You win!")
             break  
         ### 4.5 - Regardless of choice, board is updated ###
-        user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+        user_choice = paint_board(dealer_cards, player_cards, dealer_score, player_score)
   
       else: 
         # we also get the return from this container func from our user validation
-        user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+        user_choice = paint_board(dealer_cards, player_cards, dealer_score, player_score)
         # ERROR MESSAGE HERE FOR LATER
         is_validated = validate_input(user_choice)
 
