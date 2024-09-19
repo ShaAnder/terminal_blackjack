@@ -157,17 +157,24 @@ def paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, c
     condition (str): the condition we pass in to determine what the board paints 
   """
 
-  ### 1. Paint Board ###
-  board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score, condition = condition)     
+  # the reason this is 2 function calls in one is I want to not only paint the board
+  # but also different status messages alongside it, allowing the user to effectively
+  # see the stage changes and get feedback.
+
+  ### 1. Clear our screen ###
+  # firstly we want to clear our screen whenever the game board is updated
+  clear()
   
-  ### 2. Get user Input or paint calculating ###
-  # while the game is still going we want to keep asking the user 
-  # so we repaint the board with the input.
-  # HOWEVER there are times where we want to repaint the board with
-  # the caclulating text line to give the effect the game is loading
+  ### 2. Paint Board ###
+  # paint our board with the cards, and scores
+  board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)     
+  
+  ### 3. paint our message ###
+  # paints our status / terminal / feedback message based on the various
+  # conditions we provide. This made sense to be here as one of these will
+  # always be painted when im painting the board
 
   # we have 3 conditions: accepting_inputs, calculating, continue state
-
   if condition == "accepting_inputs":
     user_choice = get_user_input(TERMINAL_INPUT)
     return user_choice
