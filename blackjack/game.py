@@ -28,6 +28,7 @@ cards_values = {"A": 11, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9,
 # terminal lines for our input, error message, constants as they should never be changed
 TERMINAL_INPUT = 34
 TERMINAL_STATUS = 35
+SLEEP_TIMER = 0.5
 
 
 ### --- FUNCTIONS --- ###
@@ -48,9 +49,9 @@ def swap_screen():
   Small loop for swapping between screens consisting of
   our clear function and the sleep module
   """
-  sleep(1)
+  sleep(SLEEP_TIMER)
   clear()
-  sleep(1)
+  sleep(SLEEP_TIMER)
 
 def create_deck():
   """
