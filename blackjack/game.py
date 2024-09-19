@@ -169,9 +169,6 @@ def validate_input(choice):
     return True 
 
 def calculate_victor(player_win, message):
-  sleep(0.5)
-  calculating()
-  sleep(0.5)
   if player_win == "player":
     win(message)
   else:
@@ -317,32 +314,39 @@ def blackjack_start(deck):
         # when the player chooses to stand, the dealer will draw UNTIL it reaches 17
         if user_choice.upper() == "S" or user_choice == "s":
           while dealer_score <= 17:
-            clear()
             draw_card(deck, dealer_card_data, dealer_cards, False)
             dealer_score += dealer_card_data[len(dealer_card_data) -1].card_value
             dealer_hidden_score = dealer_score - dealer_card_data[0].card_value
             # we want to keep the screen updating until the dealer gets over 17
             board(dealer_cards, player_cards, dealer_hidden_score, player_score)
             # if the dealers score is over 17 break the loop
-            if dealer_score >= 17 or player_score > 21:
-              clear()
-              ## 4.6 - Display victory conditions - ###
-              # if the player has finished hitting and the dealer has finished drawing we should run our victory conditions here
-              if player_score > dealer_score:
-                paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
-                sleep(2)
-                calculate_victor("player", f"Your score is: {player_score} the dealers is: {dealer_score}, you win!")
-                break
-              elif player_score < dealer_score:
-                paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
-                sleep(2)
-                calculate_victor("dealer", f"Your score is: {player_score} the dealers is: {dealer_score}, you lose...")
-                break
-              elif dealer_score > 21:
-                paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
-                sleep(2)
-                calculate_victor("player", f"The dealers score is: {dealer_score}, they've gone bust! You win!")
-                break  
+            clear()
+            if dealer_score >= 17:
+              break
+
+          ## 4.6 - Display victory conditions - ###
+          # once user has finished hitting and dealer has also, we then check 
+          board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+          sleep(1)
+          clear()
+          calculating()
+          sleep(1)
+          clear()
+          if player_score > dealer_score:
+            paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+            sleep(2)
+            calculate_victor("player", f"Your score is: {player_score} the dealers is: {dealer_score}, you win!")
+            break
+          elif player_score < dealer_score:
+            paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+            sleep(2)
+            calculate_victor("dealer", f"Your score is: {player_score} the dealers is: {dealer_score}, you lose...")
+            break
+          elif dealer_score > 21:
+            paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
+            sleep(2)
+            calculate_victor("player", f"The dealers score is: {dealer_score}, they've gone bust! You win!")
+            break  
         ### 4.5 - Regardless of choice, board is updated ###
         user_choice = paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
   

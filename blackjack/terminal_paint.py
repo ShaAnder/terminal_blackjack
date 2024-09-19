@@ -159,4 +159,4 @@ def loss(condition_message):
 
 def calculating():
   clear()
-  position(term.center("Calculating..."), 0, 35, term.white_on_black)
+  position(term.center("Calculating the scores..."), 0, 19, term.yellow)
