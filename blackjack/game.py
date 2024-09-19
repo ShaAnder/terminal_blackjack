@@ -43,6 +43,15 @@ def clear():
     else:
         _ = system('clear')
 
+def swap_screen():
+  """
+  Small loop for swapping between screens consisting of
+  our clear function and the sleep module
+  """
+  sleep(1)
+  clear()
+  sleep(1)
+
 def create_deck():
   """
   Creates a new deck of 52 card objects by passing each card suit, card and card value
@@ -270,11 +279,9 @@ def blackjack_start(deck):
 
   # now we draw our dealers card, dealer will only draw one for simplicity
   # then when player finishes hitting the dealer will begin to draw his cards
-  draw_card(deck, player_card_data, player_cards, False, True)
+  draw_card(deck, player_card_data, player_cards, True)
     
-
-
-  ### STEP 3.2 - CALCULATE OUR SCORE ###
+  ### STEP 1.2 - CALCULATE OUR SCORE ###
   
   # player score calculated normally
   player_score = calculate_score(player_card_data)
@@ -287,7 +294,9 @@ def blackjack_start(deck):
 
   # paint our intro 
   intro(display_cards(intro_cards))
-  #paint our instructions
+  # swap screens
+  swap_screens()
+  # paint our instructions
   instructions()
 
   ######################
