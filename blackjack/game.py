@@ -63,6 +63,9 @@ def calculate_score(card_data):
   Function that loops over the player_card_data and adds the score to a score array
   the function also accounts for multiple aces placed into the array by checking if
   there is already 11 in the array.
+
+  Args:
+    card_data (arr): calculates the score of the card data array of the player 
   """
   # get our player score
   score = []
@@ -75,9 +78,15 @@ def calculate_score(card_data):
       # else append the number
       score.append(i.card_value)
     # sum the player scores at the end
-    Sum = sum(score)
+    total = sum(score)
   #return the score
-  return Sum
+  # we want to run another condition here to automatically recalculate the score
+  # if there is an ace and the score is over 21 because then it will prevent the 
+  # user from atuomatically losing
+  if total > 21 and 11 in score:
+    return total - 10
+  else: 
+    return total
 
 def draw_card(deck, card_data, owners_cards, hidden, delete):
   """
@@ -245,7 +254,7 @@ def blackjack_start(deck):
   # I do this here because
   s = 0
   while len(intro_card_data) < 2:
-    draw_card(deck, intro_card_data, intro_cards, False)
+    draw_card(deck, intro_card_data, intro_cards, False, False)
     s+= 1
 
   # paint our intro 
