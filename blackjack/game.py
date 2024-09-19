@@ -78,6 +78,7 @@ def calculate_score(card_data):
     card_data (arr): calculates the score of the card data array of the player 
   """
   # get our player score
+  total = 0
   score = []
   # loop over the player card data
   for i in card_data:
