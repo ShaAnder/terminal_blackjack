@@ -281,14 +281,14 @@ def blackjack_start(deck):
 
   # now we draw our dealers card, dealer will only draw one for simplicity
   # then when player finishes hitting the dealer will begin to draw his cards
-  draw_card(deck, player_card_data, player_cards, True)
+  draw_card(deck, dealer_card_data, dealer_cards, True)
     
   ### STEP 1.2 - CALCULATE OUR SCORE ###
   
   # player score calculated normally
-  player_score = calculate_score(player_card_data)
+  player_score = 21
   # dealer score calculated normally
-  dealer_score = calculate_score(dealer_card_data)
+  dealer_score = 21
 
   ##############################
   #Step 2 Draw our Instructions#
@@ -305,6 +305,8 @@ def blackjack_start(deck):
   #Step 3 Draw our Game#
   ######################
   
+  print(dealer_cards)
+  input()
   # we also get the return from this container func from our user validation
   user_choice = paint_board(dealer_cards, player_cards, dealer_score, player_score, "awaiting_inputs")
   
@@ -320,11 +322,10 @@ def blackjack_start(deck):
     if player_score == 21 or dealer_score == 21:
       # if 21 detected swap screens and paint board with calculating text, then swap screen
       # to press any button to continue, gives player illusion of game having ai
-      swap_screen()
       paint_board(dealer_cards, player_cards, dealer_score, player_score, "calculating")
-      swap_screen()
-      sleep(2)
+      sleep(3)
       paint_board(dealer_cards, player_cards, dealer_score, player_score, "continue")
+      input()
       if player_score == 21 and dealer_score == 21:
         swap_screen()
         calculate_victor("dealer", "Double blackjack! However the house always wins...")
