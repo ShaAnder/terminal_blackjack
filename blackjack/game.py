@@ -297,7 +297,7 @@ def blackjack_start(deck):
   # paint our intro 
   intro(display_cards(intro_cards))
   # swap screens
-  swap_screens()
+  swap_screen()
   # paint our instructions
   instructions()
 
