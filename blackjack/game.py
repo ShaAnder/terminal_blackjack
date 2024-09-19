@@ -79,26 +79,30 @@ def calculate_score(card_data):
   #return the score
   return Sum
 
-def draw_card(deck, player_card_data, player_cards, hidden):
+def draw_card(deck, card_data, owners_cards, hidden, delete):
   """
   Draws A card, converts it and then appends the card data and card to
   the users hand.
-
+  
   Args:
       deck (list): list (deck of cards)
-      player_card_data (list): the card data of the player in question
+      card_data (list): the card data of the player in question
       player_cards (list): The cards of the player in question
       hidden (Bool): Hidden T/F for card, if False Card face up, else hidden
   """
   # draw a card from the deck
   card = random.choice(deck)
-  # we don't want the cards to be removed if the cards are intro cards
-  deck.remove(card)
   # convert the card to a readable format
   converted_card = Card.create_card(card, hidden)
   # append to both player card and player card data
-  player_card_data.append(card)
-  player_cards.append(converted_card)
+  card_data.append(card)
+  owners_cards.append(converted_card)
+  # checks to see if the delete argument is True or not
+  if delete == True
+    deck.remove(card)
+  else:
+    pass
+    
 
 def display_cards(cards):
   """
@@ -132,7 +136,7 @@ def display_cards(cards):
     new_card.append(line_to_print)
   return new_card
 
-def paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score):
+def paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, condition):
   """
   Paints the board for the player to interact with and see
 
@@ -141,15 +145,29 @@ def paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score):
     player_cards (arr): the players cards for printing
     dealer_score (int): the dealers current HIDDEN score for displaying
     player_score (int): the players current score for displaying
+    condition (str): the condition we pass in to determine what the board paints 
   """
 
   ### 1. Paint Board ###
   board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)     
   
-  ### 2. Get user Input ###
-  user_choice = get_user_input(TERMINAL_INPUT)
+  ### 2. Get user Input or paint calculating ###
+  # while the game is still going we want to keep asking the user 
+  # so we repaint the board with the input.
+  # HOWEVER there are times where we want to repaint the board with
+  # the caclulating text line to give the effect the game is loading
 
-  return user_choice
+  # we have 3 conditions: accepting_inputs, calculating, continue state
+
+  if condition == "accepting_inputs":
+    user_choice = get_user_input(TERMINAL_INPUT)
+    return user_choice
+  elif condition == "calculating":
+    #instead of getting the user input we paint board with calculating
+    calculating()
+  elif condition == "continue":
+    #if it's not accepting_inputs or calculating it must be user prompt to hit enter
+    cont()
   
 def validate_input(choice):
   """
@@ -169,6 +187,14 @@ def validate_input(choice):
     return True 
 
 def calculate_victor(player_win, message):
+  """
+  Takes the player whos winning string and a message and passes it to the 
+  terminal to paint
+
+  Args:
+    player_win (str): "player" or "dealer" 
+    message (str): string with the message to paint to the terminal
+  """
   if player_win == "player":
     win(message)
   else:
@@ -180,6 +206,9 @@ def calculate_victor(player_win, message):
 def blackjack_start(deck):
   """
   Main blackjack function, each run is one game.
+
+  Args:
+    deck (arr): array containing our deck of card objects
   """
 
   #####################
@@ -212,16 +241,14 @@ def blackjack_start(deck):
   #Step 1 Draw our Intro#
   #######################
 
-  # s here to loop our unique loop, could just pain screen after cards are drawn
-  # but want it to be different to player cards
+  # this loop and function call serves to create our unique "intro cards"
+  # I do this here because
   s = 0
-  #we want to do a quick while loop here to create the random intro cards
   while len(intro_card_data) < 2:
     draw_card(deck, intro_card_data, intro_cards, False)
     s+= 1
 
-  # paint our intro (we also feed in a unique card list here so that
-  # the blackjack screen has different card on every launch)
+  # paint our intro 
   intro(display_cards(intro_cards))
 
   ##############################
@@ -314,24 +341,17 @@ def blackjack_start(deck):
         # when the player chooses to stand, the dealer will draw UNTIL it reaches 17
         if user_choice.upper() == "S" or user_choice == "s":
           while dealer_score <= 17:
+            #let the dealer draw cards and calc score until it hit's 17
             draw_card(deck, dealer_card_data, dealer_cards, False)
             dealer_score += dealer_card_data[len(dealer_card_data) -1].card_value
             dealer_hidden_score = dealer_score - dealer_card_data[0].card_value
-            # we want to keep the screen updating until the dealer gets over 17
-            board(dealer_cards, player_cards, dealer_hidden_score, player_score)
-            # if the dealers score is over 17 break the loop
-            clear()
+            #once it hit's 17 or over. Repaint the board, Pass in the true statement
             if dealer_score >= 17:
+              paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, True)
               break
 
           ## 4.6 - Display victory conditions - ###
           # once user has finished hitting and dealer has also, we then check 
-          board(dealer_cards, player_cards, dealer_hidden_score, player_score)
-          sleep(1)
-          clear()
-          calculating()
-          sleep(1)
-          clear()
           if player_score > dealer_score:
             paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score)
             sleep(2)

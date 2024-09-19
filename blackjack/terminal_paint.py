@@ -159,4 +159,10 @@ def loss(condition_message):
 
 def calculating():
   clear()
-  position(term.center("Calculating the scores..."), 0, 19, term.yellow)
+  position(term.center("Calculating the scores..."), 0, 35, term.white_on_blue)
+
+def cont():
+  position(term.center("Press any key to continue the game..."), 0, 34, term.black_on_yellow)
+  with term.cbreak(), term.hidden_cursor():
+    term.inkey()
+  clear()
