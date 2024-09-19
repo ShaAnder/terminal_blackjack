@@ -28,7 +28,7 @@ cards_values = {"A": 11, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9,
 # terminal lines for our input, error message, constants as they should never be changed
 TERMINAL_INPUT = 34
 TERMINAL_STATUS = 35
-SLEEP_TIMER = 0.5
+SLEEP_TIMER = 0.3
 
 
 ### --- FUNCTIONS --- ###
@@ -304,32 +304,36 @@ def blackjack_start(deck):
   ######################
   #Step 3 Draw our Game#
   ######################
-
-
-
-  ### STEP 3.3 - PRINT OUR BOARD ###
   
   # we also get the return from this container func from our user validation
-  user_choice = paint_board(dealer_cards, player_cards, dealer_score, player_score)
+  user_choice = paint_board(dealer_cards, player_cards, dealer_score, player_score, "awaiting_inputs")
   
   #######################
   #Step 4 Begin Our Game#
   #######################
   
   # the game should allow us to play until the user goes over 21 or the dealer goes over 17
-  # we set these conditions here in case the user get's a blackjack straight away
   while player_score <= 21:
     ### Step 4.0 - BLACKJACK ###
-    # first and foremost, even before we validate, we want to see if the player or dealer
-    # has a blackjack, if so they automatically win
-    if player_score == 21 and dealer_score == 21:
-      calculate_victor("dealer", "Double blackjack! However the house always wins...")
-      break
-    elif dealer_score == 21:
-      calculate_victor("dealer", "Dealer Blackjack! Better luck next time!")
-      break
-    elif player_score == 21:
-      calculate_victor("player", "Player Blackjack! Congratulations!")
+    # we set the blackjack condition here, as we want to ensure that a blackjack is picked up
+    # game will break and then run our victory calculation function (similar to print board)
+    if player_score == 21 or dealer_score == 21:
+      # if 21 detected swap screens and paint board with calculating text, then swap screen
+      # to press any button to continue, gives player illusion of game having ai
+      swap_screen()
+      paint_board(dealer_cards, player_cards, dealer_score, player_score, "calculating")
+      swap_screen()
+      sleep(2)
+      paint_board(dealer_cards, player_cards, dealer_score, player_score, "continue")
+      if player_score == 21 and dealer_score == 21:
+        swap_screen()
+        calculate_victor("dealer", "Double blackjack! However the house always wins...")
+      elif dealer_score == 21:
+        swap_screen()
+        calculate_victor("dealer", "Dealer Blackjack! Better luck next time!")
+      elif player_score == 21:
+        swap_screen()
+        calculate_victor("player", "Player Blackjack! Congratulations!")
       break
     else:
       clear()

@@ -154,7 +154,13 @@ def loss(condition_message):
   position(term.center(condition_message), 0, 35, term.black_on_yellow) 
 
 def calculating():
+  """
+  Places a positional text for user feedback
+  """
   position(term.center("Calculating the scores..."), 0, 35, term.white_on_blue)
 
 def cont():
+  """
+  places a positional text for user_feedback
+  """
   position(term.center("Press any key to continue the game..."), 0, 34, term.black_on_yellow)
