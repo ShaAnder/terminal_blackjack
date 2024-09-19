@@ -71,7 +71,7 @@ def calculate_score(card_data):
   score = []
   # loop over the player card data
   for i in card_data:
-    #if 11 is already in the array add 1 instead (ace is 1 or 11)
+    # if 11 is already in the array add 1 instead (ace is 1 or 11)
     if 11 in score:
       score.append(1)
     else: 
@@ -79,11 +79,11 @@ def calculate_score(card_data):
       score.append(i.card_value)
     # sum the player scores at the end
     total = sum(score)
-  #return the score
   # we want to run another condition here to automatically recalculate the score
   # if there is an ace and the score is over 21 because then it will prevent the 
   # user from atuomatically losing
   if total > 21 and 11 in score:
+    # return the score
     return total - 10
   else: 
     return total
@@ -94,10 +94,11 @@ def draw_card(deck, card_data, owners_cards, hidden, delete):
   the users hand.
   
   Args:
-      deck (list): list (deck of cards)
-      card_data (list): the card data of the player in question
-      player_cards (list): The cards of the player in question
-      hidden (Bool): Hidden T/F for card, if False Card face up, else hidden
+    deck (list): list (deck of cards)
+    card_data (list): the card data of the player in question
+    player_cards (list): The cards of the player in question
+    hidden (Bool): Hidden T/F for card, if False Card face up, else hidden
+    delete (Bool): bool for confiming card deletion
   """
   # draw a card from the deck
   card = random.choice(deck)
@@ -112,7 +113,6 @@ def draw_card(deck, card_data, owners_cards, hidden, delete):
   else:
     pass
     
-
 def display_cards(cards):
   """
   Sorts the card array into a new array for displaying the cards
@@ -123,13 +123,13 @@ def display_cards(cards):
   ["┌───────────────┐┌───────────────┐", "│ 8             ││ 7             │"
 
   Args:
-      cards (list): the player or dealers cards
+      cards (list): player / dealer / intro cards
   """
   # get the lines for each card in the card list
   card_lines = [card.splitlines() for card in cards]
   # get the max lines for however many lines are in the cards
   max_lines = max(len(lines) for lines in card_lines)
-  # new card array for containing our line cars
+  # new card array for containing our card lines
   new_card = []
   # loop through our max lines
   for i in range(max_lines):
@@ -158,7 +158,7 @@ def paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, c
   """
 
   ### 1. Paint Board ###
-  board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score)     
+  board(dealer_cards = display_cards(dealer_cards), player_cards = display_cards(player_cards), dealer_score = dealer_hidden_score, player_score = player_score, condition = condition)     
   
   ### 2. Get user Input or paint calculating ###
   # while the game is still going we want to keep asking the user 
