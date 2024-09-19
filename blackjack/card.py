@@ -24,7 +24,7 @@ class Card:
 
   # added create card function to card class because it's logically to
   # do with card creation
-  def create_card(card, hidden):
+  def create_card(card):
     """
     Function to create our card, takes the card's input and using our
     pieces generates cards to add to our deck.
@@ -38,25 +38,14 @@ class Card:
     right_value_format = "│        {:>2} │"  # Right-align with width 2
     suit = "│     {}     │"
 
-    if not hidden: 
-      # Create our card template of 11 entries
-      card_rows = [top, base, base, base, base, base, base, base, bottom]
-      # Apply string formatting to the row based on the card value
-      card_rows[1] = left_value_format.format(card.value)
-      card_rows[7] = right_value_format.format(card.value) 
-      # Format the suit
-      card_rows[4] = suit.format(card.suit)
-      # If hidden (dealer card) return the hidden card from layout
-    if hidden:
-              # Create our card template of 11 entries
-      card_rows = [top, base, base, base, base, base, base, base, bottom]
-      # Apply string formatting to the row based on the card value
-      card_rows[1] = left_value_format.format("?")
-      card_rows[7] = right_value_format.format("?") 
-      # Format the suit
-      card_rows[4] = suit.format("?")
-      # If hidden (dealer card) return the hidden card from layout
-    # else return new card joined into a single entity
+    # Create our card template of 11 entries
+    card_rows = [top, base, base, base, base, base, base, base, bottom]
+    # Apply string formatting to the row based on the card value
+    card_rows[1] = left_value_format.format(card.value)
+    card_rows[7] = right_value_format.format(card.value) 
+    # Format the suit
+    card_rows[4] = suit.format(card.suit)
+    # If hidden (dealer card) return the hidden card from layout
     return "\n".join(card_rows)
 
 

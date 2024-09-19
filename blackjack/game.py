@@ -88,7 +88,7 @@ def calculate_score(card_data):
   else: 
     return total
 
-def draw_card(deck, card_data, owners_cards, hidden, delete):
+def draw_card(deck, card_data, owners_cards, delete):
   """
   Draws A card, converts it and then appends the card data and card to
   the users hand.
@@ -97,13 +97,12 @@ def draw_card(deck, card_data, owners_cards, hidden, delete):
     deck (list): list (deck of cards)
     card_data (list): the card data of the player in question
     player_cards (list): The cards of the player in question
-    hidden (Bool): Hidden T/F for card, if False Card face up, else hidden
     delete (Bool): bool for confiming card deletion
   """
   # draw a card from the deck
   card = random.choice(deck)
   # convert the card to a readable format
-  converted_card = Card.create_card(card, hidden)
+  converted_card = Card.create_card(card)
   # append to both player card and player card data
   card_data.append(card)
   owners_cards.append(converted_card)
@@ -116,7 +115,7 @@ def draw_card(deck, card_data, owners_cards, hidden, delete):
 def display_cards(cards):
   """
   Sorts the card array into a new array for displaying the cards
-  side by side 
+  side by side.
 
   Example input / output: 
   ["┌───────────────┐","│ 8             │","┌───────────────┐", "│ 7             │"]
@@ -147,7 +146,7 @@ def display_cards(cards):
 
 def paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, condition):
   """
-  Paints the board for the player to interact with and see
+  Paints the board for the player to interact with and see.
 
   Args:
     dealer_cards (arr): the dealers cards for printing
@@ -187,16 +186,16 @@ def paint_board(dealer_cards, player_cards, dealer_hidden_score, player_score, c
   
 def validate_input(choice):
   """
-  Validates the input, and returns true if input is valid false if it is not
+  Validates the input, and returns true if input is valid false if it is not.
   
   Args:
-    user_choice (str): user choice, str if correct
+    user_choice (str): user choice, str if correct.
   """
   
   # I wanted to keep the user input validation as simple as possible, to ensure that the 
   # user could not get any wrong ideas as well as not having to write an exhaustive loop
-  # to make sure that 
 
+  # check to see if the user choice meets the criteria, if not more than one and not H or S
   if len(choice) != 1 or (choice.upper() != 'H' and choice.upper() != 'S'):
     #throw our error message, setting y coord to be the line below our hit or stay
     error_message(TERMINAL_STATUS, "Error: Please enter a valid input: H for Hit or S for Stay")
@@ -209,26 +208,23 @@ def validate_input(choice):
 def calculate_victor(player_win, message):
   """
   Takes the player whos winning string and a message and passes it to the 
-  terminal to paint
+  terminal to paint.
 
   Args:
-    player_win (str): "player" or "dealer" 
-    message (str): string with the message to paint to the terminal
+    player_win (str): "player" or "dealer".
+    message (str): string with the message to paint to the terminal.
   """
   if player_win == "player":
     win(message)
   else:
     loss(message)
-  sleep(2)
-  clear()
   
-
 def blackjack_start(deck):
   """
   Main blackjack function, each run is one game.
 
   Args:
-    deck (arr): array containing our deck of card objects
+    deck (arr): array containing our deck of card objects.
   """
 
   #####################
@@ -247,9 +243,7 @@ def blackjack_start(deck):
   # set our player and dealers scores
   player_score = 0
   dealer_score = 0
-  # we want to have a hidden dealer score for when we display the dealer
-  # score, so the player cannot guess what the dealers hidden first card is.
-  # the dealer's real score will keep track of if the dealer goes bust or not.
+  # special dealer score for painting to the screen (removes the hidden card)
   dealer_hidden_score = 0
 
   # create an empty user input here so we can check it for validating
@@ -258,53 +252,28 @@ def blackjack_start(deck):
   game_on = True
 
   #######################
-  #Step 1 Draw our Intro#
+  #Step 1 Draw our Cards#
   #######################
-
-  # this loop and function call serves to create our unique "intro cards"
-  # I do this here because
-  s = 0
-  while len(intro_card_data) < 2:
-    draw_card(deck, intro_card_data, intro_cards, False, False)
-    s+= 1
-
-  # paint our intro 
-  intro(display_cards(intro_cards))
-
-  ##############################
-  #Step 2 Draw our Instructions#
-  ##############################
-
-  instructions()
-  clear()
-
-  ######################
-  #Step 3 Draw our Game#
-  ######################
-
-  ### STEP 3.1 - DRAW CARDS ###
-
+   
   # while loop to do our initial card drawing
   # i to keep track of the loops
   i = 0
   while len(player_card_data) < 2:
     # draw our player cards
-    draw_card(deck, player_card_data, player_cards, False)
-    # update our player score
-    if len(player_card_data) == 2:
-      player_score += calculate_score(player_card_data)
-
-    # Randomly drawing dealer cards, we want one to be hidden and the rest displayed
-    # so for the first loop we will call it with true, and with the second we will call
-    #  it with false
-    if i == 0:
-      draw_card(deck, dealer_card_data, dealer_cards, True)
-    else: 
-      draw_card(deck, dealer_card_data, dealer_cards, False)
-    # Updating Dealer Score, we want it to stay hidden so we
-    
+    draw_card(deck, player_card_data, player_cards, True)
+    # draw our intro cards
+    draw_card(deck, intro_card_data, intro_cards, False)
     # we increment the loop so we get accurate scoring
     i+=1
+    # once our player cards are at 2 break the loop
+    if len(player_card_data) == 2:
+      break
+
+  # now we draw our dealers card, dealer will only draw one for simplicity
+  # then when player finishes hitting the dealer will begin to draw his cards
+  draw_card(deck, player_card_data, player_cards, False, True)
+    
+
 
   ### STEP 3.2 - CALCULATE OUR SCORE ###
   
@@ -317,6 +286,21 @@ def blackjack_start(deck):
   # whenever we update the score from now on, we can just update both
   # values with the new card value
   dealer_hidden_score = dealer_score - dealer_card_data[0].card_value
+
+  ##############################
+  #Step 2 Draw our Instructions#
+  ##############################
+
+  # paint our intro 
+  intro(display_cards(intro_cards))
+  #paint our instructions
+  instructions()
+
+  ######################
+  #Step 3 Draw our Game#
+  ######################
+
+
 
   ### STEP 3.3 - PRINT OUR BOARD ###
   
@@ -351,7 +335,7 @@ def blackjack_start(deck):
         ### 4.3 - Player Chooses To Hit ###
         # the player chooses to hit, they are allowed to hit until they go bust or stand
         if user_choice.upper() == "H" or user_choice == "h":
-          draw_card(deck, player_card_data, player_cards, False)
+          draw_card(deck, player_card_data, player_cards, True)
           player_score += player_card_data[len(player_card_data) -1].card_value
           # we put the check for player score being too much here, because player can accidently go over 21
           if player_score > 21:
@@ -362,7 +346,7 @@ def blackjack_start(deck):
         if user_choice.upper() == "S" or user_choice == "s":
           while dealer_score <= 17:
             #let the dealer draw cards and calc score until it hit's 17
-            draw_card(deck, dealer_card_data, dealer_cards, False)
+            draw_card(deck, dealer_card_data, dealer_cards, True)
             dealer_score += dealer_card_data[len(dealer_card_data) -1].card_value
             dealer_hidden_score = dealer_score - dealer_card_data[0].card_value
             #once it hit's 17 or over. Repaint the board, Pass in the true statement

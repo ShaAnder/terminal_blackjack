@@ -43,8 +43,6 @@ def intro(display_cards):
   """
   Creates the intro screen using terminal paint.
   """
-  # clear screen function
-  clear()
   # gets every line in the logo, splits it and then prints / colors it
   for line in layout.game_heading.split("\n"):
     print(term.yellow + term.center(line))
@@ -65,7 +63,6 @@ def instructions():
   """
   Creats the instructions screen for the game
   """
-  clear()
   for line in layout.welcome_heading.split("\n"):
     print(term.yellow + term.center(line))
   for line in layout.instructions_text.split("\n"):
@@ -74,7 +71,6 @@ def instructions():
   position(term.center("Press any key begin the game"), 0, 34, term.black_on_yellow)
   with term.cbreak(), term.hidden_cursor():
     term.inkey()
-  clear()
 
 def board(dealer_cards, player_cards, dealer_score, player_score):
   """
@@ -158,11 +154,7 @@ def loss(condition_message):
   position(term.center(condition_message), 0, 35, term.black_on_yellow) 
 
 def calculating():
-  clear()
   position(term.center("Calculating the scores..."), 0, 35, term.white_on_blue)
 
 def cont():
   position(term.center("Press any key to continue the game..."), 0, 34, term.black_on_yellow)
-  with term.cbreak(), term.hidden_cursor():
-    term.inkey()
-  clear()
