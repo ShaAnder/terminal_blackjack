@@ -126,7 +126,7 @@ def error_message(terminal_row, error_message):
     terminal_row (int): number of the row the error message will appear on
     error_message (str): the message for the user
   """
-  with term.location(0, 35):
+  with term.location(0, 31):
     print(term.yellow_on_black + term.center(error_message))
 
 def win(condition_message):
@@ -138,7 +138,7 @@ def win(condition_message):
   """
   for line in layout.win_heading.split("\n"):
       print(term.yellow + term.center(line))
-  position(term.center(condition_message), 0, 35, term.black_on_yellow) 
+  position(term.center(condition_message), 0, 30, term.black_on_yellow) 
   # Ask player to play again
 
 
@@ -151,16 +151,16 @@ def loss(condition_message):
   """
   for line in layout.loss_heading.split("\n"):
       print(term.yellow + term.center(line))
-  position(term.center(condition_message), 0, 35, term.black_on_yellow) 
+  position(term.center(condition_message), 0, 30, term.black_on_yellow) 
 
 def calculating():
   """
   Places a positional text for user feedback
   """
-  position(term.center("Calculating the scores..."), 0, 35, term.white_on_blue)
+  position(term.center("BLACKJACK DETECTED! Calculating the scores..."), 0, 30, term.white_on_blue)
 
 def cont():
   """
   places a positional text for user_feedback
   """
-  position(term.center("Press any key to continue the game..."), 0, 34, term.black_on_yellow)
+  position(term.center("Press any key to continue the game..."), 0, 30, term.black_on_yellow)
