@@ -118,12 +118,11 @@ def get_user_input(terminal_row):
   
     return target
 
-def error_message(terminal_row, error_message):
+def error_message(error_message):
   """
   Rerurns an error message painted on the screen for user feedback
 
   Args:
-    terminal_row (int): number of the row the error message will appear on
     error_message (str): the message for the user
   """
   with term.location(0, 31):
