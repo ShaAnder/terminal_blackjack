@@ -197,9 +197,6 @@ def paint_board(dealer_cards, player_cards, dealer_score, player_score, conditio
   if condition == "accepting_inputs":
     user_choice = get_user_input(TERMINAL_INPUT)
     return user_choice
-  elif condition == "calculating":
-    #instead of getting the user input we paint board with calculating
-    calculating_next()
   elif condition == "continue":
     #if it's not accepting_inputs or calculating it must be user prompt to hit enter
     cont()
@@ -371,12 +368,13 @@ def blackjack_start(deck):
             draw_card(deck, dealer_card_data, dealer_cards, True)
             dealer_score += dealer_card_data[len(dealer_card_data) -1].card_value
             #once it hit's 17 or over. Repaint the board, with the calculating arg
+            calculating("Card Drawn! Calculating the scores...")
+            sleep(1)
+            clear()
             if dealer_score >= 17:
               break
           ## 4.6 - Display victory conditions - ###
           # once user has finished hitting and dealer has also, we then check 
-          calculating("Card Drawn! Calculating the scores...")
-          sleep(1)
           if player_score > dealer_score:
             paint_board(dealer_cards, player_cards, dealer_score, player_score, "continue")
             sleep(1)
