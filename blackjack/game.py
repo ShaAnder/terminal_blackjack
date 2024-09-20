@@ -199,7 +199,7 @@ def paint_board(dealer_cards, player_cards, dealer_score, player_score, conditio
     return user_choice
   elif condition == "calculating":
     #instead of getting the user input we paint board with calculating
-    calculating()
+    calculating_next()
   elif condition == "continue":
     #if it's not accepting_inputs or calculating it must be user prompt to hit enter
     cont()
@@ -331,7 +331,8 @@ def blackjack_start(deck):
     if player_score == 21 or dealer_score == 21:
       # if 21 detected swap screens and paint board with calculating text, then swap screen
       # to press any button to continue, gives player illusion of game having ai
-      calculating()
+      sleep(1)
+      calculating("BLACKJACK DETECTED! Calculating victor...")
       if player_score == 21 and dealer_score == 21:
         swap_screen()
         calculate_victor("dealer", "Double blackjack! However the house always wins...")
@@ -353,9 +354,9 @@ def blackjack_start(deck):
           draw_card(deck, player_card_data, player_cards, True)
           player_score += player_card_data[len(player_card_data) -1].card_value
           # we then repaint the screen with our calculations and ask the player to hit again
-          calculating()
+          calculating("Card Drawn! Calculating the scores...")
+          sleep(1)
           if player_score > 21:
-            swap_screen()
             calculate_victor("dealer", f"Your score is: {player_score}, you've gone bust...")
             break
           else:
@@ -363,30 +364,33 @@ def blackjack_start(deck):
         ### 4.4 - Player Chooses To Stand ###
         # when the player chooses to stand, the dealer will draw UNTIL it reaches 17
         if user_choice.upper() == "S" or user_choice == "s":
+          calculating("Card Drawn! Calculating the scores...")
+          sleep(1)
           while dealer_score <= 17:
             #let the dealer draw cards and calc score until it hit's 17
             draw_card(deck, dealer_card_data, dealer_cards, True)
             dealer_score += dealer_card_data[len(dealer_card_data) -1].card_value
             #once it hit's 17 or over. Repaint the board, with the calculating arg
             if dealer_score >= 17:
-              paint_board(dealer_cards, player_cards, dealer_score, player_score, "calculating")
               break
-
           ## 4.6 - Display victory conditions - ###
           # once user has finished hitting and dealer has also, we then check 
+          calculating("Card Drawn! Calculating the scores...")
+          sleep(1)
           if player_score > dealer_score:
-            paint_board(dealer_cards, player_cards, dealer_score, player_score)
-            sleep(2)
+            paint_board(dealer_cards, player_cards, dealer_score, player_score, "continue")
+            sleep(1)
+            clear()
             calculate_victor("player", f"Your score is: {player_score} the dealers is: {dealer_score}, you win!")
             break
           elif player_score < dealer_score:
             paint_board(dealer_cards, player_cards, dealer_score, player_score, "continue")
-            sleep(2)
+            sleep(1)
             calculate_victor("dealer", f"Your score is: {player_score} the dealers is: {dealer_score}, you lose...")
             break
           elif dealer_score > 21:
             paint_board(dealer_cards, player_cards, dealer_score, player_score, "continue")
-            sleep(2)
+            sleep(1)
             calculate_victor("player", f"The dealers score is: {dealer_score}, they've gone bust! You win!")
             break  
         ### 4.5 - Regardless of choice, board is updated ###
@@ -394,6 +398,7 @@ def blackjack_start(deck):
   
       else: 
         # we also get the return from this container func from our user validation
+        
         user_choice = paint_board(dealer_cards, player_cards, dealer_score, player_score, "accepting_inputs")
         # ERROR MESSAGE HERE FOR LATER
         is_validated = validate_input(user_choice)
