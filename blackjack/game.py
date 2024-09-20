@@ -373,7 +373,7 @@ def blackjack_start(deck):
           ## 4.6 - Display victory conditions - ###
           # once user has finished hitting and dealer has also, we then check 
           paint_board(dealer_cards, player_cards, dealer_score, player_score, "continue")
-          elif player_score > dealer_score:
+          if player_score > dealer_score:
             swap_screen()
             calculate_victor("dealer", f"Your score is: {player_score} the dealers is: {dealer_score}, House Wins!")
             break
