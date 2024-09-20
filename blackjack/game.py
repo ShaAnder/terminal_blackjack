@@ -369,24 +369,24 @@ def blackjack_start(deck):
             if dealer_score >= 17:
               break
           calculating("Card Drawn! Calculating the scores...")
-          sleep(1)
-          clear()
+          swap_screen()
           ## 4.6 - Display victory conditions - ###
           # once user has finished hitting and dealer has also, we then check 
           paint_board(dealer_cards, player_cards, dealer_score, player_score, "continue")
-          if player_score > dealer_score:
-            sleep(1)
-            clear()
+          elif player_score > dealer_score:
+            swap_screen()
+            calculate_victor("dealer", f"Your score is: {player_score} the dealers is: {dealer_score}, House Wins!")
+            break
+          elif player_score > dealer_score:
+            swap_screen()
             calculate_victor("player", f"Your score is: {player_score} the dealers is: {dealer_score}, you win!")
             break
           elif player_score < dealer_score:
-            paint_board(dealer_cards, player_cards, dealer_score, player_score, "continue")
-            sleep(1)
+            swap_screen()
             calculate_victor("dealer", f"Your score is: {player_score} the dealers is: {dealer_score}, you lose...")
             break
           elif dealer_score > 21:
-            paint_board(dealer_cards, player_cards, dealer_score, player_score, "continue")
-            sleep(1)
+            swap_screen()
             calculate_victor("player", f"The dealers score is: {dealer_score}, they've gone bust! You win!")
             break  
         ### 4.5 - Regardless of choice, board is updated ###
