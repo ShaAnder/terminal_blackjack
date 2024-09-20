@@ -361,22 +361,20 @@ def blackjack_start(deck):
         ### 4.4 - Player Chooses To Stand ###
         # when the player chooses to stand, the dealer will draw UNTIL it reaches 17
         if user_choice.upper() == "S" or user_choice == "s":
-          calculating("Card Drawn! Calculating the scores...")
-          sleep(1)
           while dealer_score <= 17:
             #let the dealer draw cards and calc score until it hit's 17
             draw_card(deck, dealer_card_data, dealer_cards, True)
             dealer_score += dealer_card_data[len(dealer_card_data) -1].card_value
             #once it hit's 17 or over. Repaint the board, with the calculating arg
-            calculating("Card Drawn! Calculating the scores...")
-            sleep(1)
-            clear()
             if dealer_score >= 17:
               break
+          calculating("Card Drawn! Calculating the scores...")
+          sleep(1)
+          clear()
           ## 4.6 - Display victory conditions - ###
           # once user has finished hitting and dealer has also, we then check 
+          paint_board(dealer_cards, player_cards, dealer_score, player_score, "continue")
           if player_score > dealer_score:
-            paint_board(dealer_cards, player_cards, dealer_score, player_score, "continue")
             sleep(1)
             clear()
             calculate_victor("player", f"Your score is: {player_score} the dealers is: {dealer_score}, you win!")
