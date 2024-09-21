@@ -224,27 +224,6 @@ def calculate_victor(player_win, message):
   else:
     loss(message)
   
-def play_again(deck):
-  """
-  Ask the user if they want to play again.
-  """
-  #clear screen
-  clear()
-  # get user input
-  try_again = get_user_input("Would you like to play again? Y/N: ")
-  # validate input
-  valid_try_again = validate_input(try_again, "Y", "N")
-  if valid_try_again == True:
-    if try_again == "Y":
-      # if validation == True reset game 
-      clear()
-      blackjack_start(deck)
-    else:
-      clear()
-      break
-    
-
-
 def blackjack_start(deck):
   """
   Main blackjack function, each run is one game.
@@ -397,8 +376,20 @@ def blackjack_start(deck):
           # both players have drawn over 21 both lose 
           swap_screen()
           calculate_victor("dealer", f"Your score is: {player_score} the dealers is: {dealer_score}, Double bust... You both lose...")
+        # play again functionality
         sleep(2)
-        play_again(deck)
+        clear()
+        # get user input
+        try_again = get_user_input("Would you like to play again? Y/N: ")
+        # validate input
+        valid_try_again = validate_input(try_again, "Y", "N")
+        if valid_try_again == True:
+          if try_again == "Y":
+            # if validation == True reset game 
+            clear()
+            blackjack_start(deck)
+          else:
+            clear()
     # well if if validated is not true, we need to throw our error and go again
     else:
       # if code not valid, throw error
