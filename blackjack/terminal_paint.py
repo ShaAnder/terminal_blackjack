@@ -135,10 +135,10 @@ def win(condition_message):
   Args:
     error_message (str): the message for the user
   """
-  with term.location (0, 11):
+  with term.location (0, 13):
     for line in layout.win_heading.split("\n"):
         print(term.yellow + term.center(line))
-  position(term.center(condition_message), 0, 20, term.black_on_yellow) 
+  position(term.center(condition_message), 0, 22, term.black_on_yellow) 
   # Ask player to play again
 
 
@@ -149,10 +149,10 @@ def loss(condition_message):
   Args:
     error_message (str): the message for the user
   """
-  with term.location (0, 11):
+  with term.location (0, 13):
     for line in layout.loss_heading.split("\n"):
         print(term.yellow + term.center(line))
-  position(term.center(condition_message), 0, 20, term.black_on_yellow) 
+  position(term.center(condition_message), 0, 22, term.black_on_yellow) 
 
 def calculating(message):
   """
