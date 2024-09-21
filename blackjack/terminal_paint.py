@@ -81,7 +81,7 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
       dealer_score (int): the dealers current HIDDEN score for displaying
       player_score (int): the players current score for displaying
   """
-
+  print(term.white + term.center(layout.border))
   print(term.blue + term.center(layout.dealer_hand))
   for line in dealer_cards:
     print(term.blue + term.center(line))
@@ -89,7 +89,7 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
   print(term.green + term.center(layout.player_hand))
   for line in player_cards:
     print(term.green + term.center(line))
-
+  print(term.white + term.center(layout.border))
  
 
 def get_user_input(terminal_row):
