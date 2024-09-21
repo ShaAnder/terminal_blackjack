@@ -240,7 +240,8 @@ def play_again(deck):
       clear()
       blackjack_start(deck)
     else:
-      exit()
+      clear()
+      break()
     
 
 
@@ -379,29 +380,24 @@ def blackjack_start(deck):
           elif player_score == 21:
             swap_screen()
             calculate_victor("player", "Player Blackjack! Congratulations!")
-          break
         elif player_score > dealer_score and player_score < 21:
           swap_screen()
           calculate_victor("player", f"Your score is: {player_score} the dealers is: {dealer_score}, You win!")
-          break
         elif player_score < dealer_score and dealer_score < 21:
           swap_screen()
           calculate_victor("dealer", f"Your score is: {player_score} the dealers is: {dealer_score}, you lose...")
-          break
         elif player_score > 21 and dealer_score < 21:
           swap_screen()
           calculate_victor("dealer", f"Your score is: {player_score}, you've gone bust...")
-          break  
+
         elif dealer_score > 21 and player_score < 21:
           swap_screen()
           calculate_victor("player", f"The dealers score is: {dealer_score}, they've gone bust! You win!")
-          break 
         else:
           # both players have drawn over 21 both lose 
           swap_screen()
           calculate_victor("dealer", f"Your score is: {player_score} the dealers is: {dealer_score}, Double bust... You both lose...")
-          break 
-        sleep(1)
+        sleep(2)
         play_again(deck)
     # well if if validated is not true, we need to throw our error and go again
     else:
