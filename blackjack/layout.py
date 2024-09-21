@@ -1,14 +1,14 @@
 """
 This layout module is going to hold all our images for the game
-These will be painted to the screen via terminal paint as we 
+These will be painted to the screen via terminal paint as we
 progress through the game logic
 """
 
 game_heading = """
 ██████╗ ██╗      █████╗  ██████╗██╗  ██╗     ██╗ █████╗  ██████╗██╗  ██╗
 ██╔══██╗██║     ██╔══██╗██╔════╝██║ ██╔╝     ██║██╔══██╗██╔════╝██║ ██╔╝
-██████╔╝██║     ███████║██║     █████╔╝      ██║███████║██║     █████╔╝ 
-██╔══██╗██║     ██╔══██║██║     ██╔═██╗ ██   ██║██╔══██║██║     ██╔═██╗ 
+██████╔╝██║     ███████║██║     █████╔╝      ██║███████║██║     █████╔╝
+██╔══██╗██║     ██╔══██║██║     ██╔═██╗ ██   ██║██╔══██║██║     ██╔═██╗
 ██████╔╝███████╗██║  ██║╚██████╗██║  ██╗╚█████╔╝██║  ██║╚██████╗██║  ██╗
 ╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
 """
@@ -32,20 +32,20 @@ win_heading = """
 """
 
 loss_heading = """
-██╗   ██╗ ██████╗ ██╗   ██╗    ██╗      ██████╗ ███████╗███████╗             
-╚██╗ ██╔╝██╔═══██╗██║   ██║    ██║     ██╔═══██╗██╔════╝██╔════╝             
- ╚████╔╝ ██║   ██║██║   ██║    ██║     ██║   ██║███████╗█████╗               
-  ╚██╔╝  ██║   ██║██║   ██║    ██║     ██║   ██║╚════██║██╔══╝               
+██╗   ██╗ ██████╗ ██╗   ██╗    ██╗      ██████╗ ███████╗███████╗
+╚██╗ ██╔╝██╔═══██╗██║   ██║    ██║     ██╔═══██╗██╔════╝██╔════╝
+ ╚████╔╝ ██║   ██║██║   ██║    ██║     ██║   ██║███████╗█████╗
+  ╚██╔╝  ██║   ██║██║   ██║    ██║     ██║   ██║╚════██║██╔══╝
    ██║   ╚██████╔╝╚██████╔╝    ███████╗╚██████╔╝███████║███████╗    ██╗██╗██╗
    ╚═╝    ╚═════╝  ╚═════╝     ╚══════╝ ╚═════╝ ╚══════╝╚══════╝    ╚═╝╚═╝╚═╝
 """
 
 instructions_text = """
-Blackjack! The classic game of 21! The aim of the game is to try and reach 21 
+Blackjack! The classic game of 21! The aim of the game is to try and reach 21
 before the dealer without going over!
 
-In this simplified version the player will draw first by hitting (H) 
-until they choose to stay (S) after which the dealer will take his turn. 
+In this simplified version the player will draw first by hitting (H)
+until they choose to stay (S) after which the dealer will take his turn.
 
 Once the dealer stops, i t will calculate the scores and declare a winner!
 
@@ -55,14 +55,14 @@ Good luck and remember... The house always wins...
 
 instructions_cards = """
 
- ┌─────────┐ ┌──────────┐ 
- │ 1       │ │ 6        │ 
- │         │ │          │ 
- │         │ │          │ 
- │         │ │          │ 
- │         │ │          │ 
- │       1 │ │        6 │ 
- └─────────┘ └──────────┘ 
+ ┌─────────┐ ┌──────────┐
+ │ 1       │ │ 6        │
+ │         │ │          │
+ │         │ │          │
+ │         │ │          │
+ │         │ │          │
+ │       1 │ │        6 │
+ └─────────┘ └──────────┘
 """
 
 scores = """
