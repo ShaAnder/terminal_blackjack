@@ -35,13 +35,18 @@ def position(text, xcoords, ycoords, color):
 
 def clear():
   """
-  Clears the terminal
+  Clears the terminal, this is different to 
+  the main clear function in game as I need this
+  for when im using the with term.cbreak() calls.
   """
   print(term.home + term.clear)
 
 def intro(display_cards):
   """
   Creates the intro screen using terminal paint.
+
+  Args:
+    display_cards (arr) array containing the intro_cards for display.
   """
   with term.location (0, 8):
   # gets every line in the logo, splits it and then prints / colors it
@@ -59,7 +64,7 @@ def intro(display_cards):
 
 def instructions():
   """
-  Creats the instructions screen for the game
+  Creats the instructions screen for the game.
   """
   with term.location (0, 7):
     # gets every line in the logo, splits it and then prints / colors it
@@ -73,13 +78,13 @@ def instructions():
 
 def board(dealer_cards, player_cards, dealer_score, player_score):
   """
-  Populate the terminal window with the dynamic cards we created in game.py
+  Populate the terminal window with the dynamic cards we created in game.py.
 
   Args:
-      dealer_cards (arr): the dealers cards for printing
-      player_cards (arr): the players cards for printing
-      dealer_score (int): the dealers current HIDDEN score for displaying
-      player_score (int): the players current score for displaying
+      dealer_cards (arr): the dealers cards for printing.
+      player_cards (arr): the players cards for printing.
+      dealer_score (int): the dealers current HIDDEN score for displaying.
+      player_score (int): the players current score for displaying.
   """
   print(term.white + term.center(layout.border))
   print(term.blue + term.center(layout.dealer_hand))
@@ -91,17 +96,16 @@ def board(dealer_cards, player_cards, dealer_score, player_score):
     print(term.green + term.center(line))
   print(term.white + term.center(layout.border))
  
-
-def get_user_input(terminal_row):
+def get_user_input(terminal_row, message):
   """
   Takes the value entered, passes it into the validatior, checks to see if it is either 
-  "Hit" or "Stay" then returns that string to tell the program what to do next
+  "Hit" or "Stay" then returns that string to tell the program what to do next.
 
   Args:
-    terminal_row:  (int) -> number row where we want our input message to appear
-    TERMINAL_STATUS:  (int) -> number row where we want our error message to appeaer
+    terminal_row (int): number row where we want our input message to appear.
+    message (str): message we pass in whenever we want user to input
   """
-  print(term.move(terminal_row, 0) + term.black_on_yellow + term.center("Please type H to hit or S to Stay: ") + term.normal)
+  print(term.move(terminal_row, 0) + term.black_on_yellow + term.center(message) + term.normal)
   print(term.move(terminal_row, 55)+ term.normal)
   with term.cbreak():
     target, inp, i = "", term.inkey(), 1
@@ -119,34 +123,32 @@ def get_user_input(terminal_row):
 
 def error_message(error_message):
   """
-  Rerurns an error message painted on the screen for user feedback
+  Rerurns an error message painted on the screen for user feedback.
 
   Args:
-    error_message (str): the message for the user
+    error_message (str): the message for the user.
   """
   with term.location(0, 35):
     print(term.yellow_on_black + term.center(error_message))
 
 def win(condition_message):
   """
-  Rerurns an error message painted on the screen for user feedback
+  Rerurns an error message painted on the screen for user feedback.
 
   Args:
-    error_message (str): the message for the user
+    error_message (str): the message for the user.
   """
   with term.location (0, 13):
     for line in layout.win_heading.split("\n"):
         print(term.yellow + term.center(line))
   position(term.center(condition_message), 0, 23, term.black_on_yellow) 
-  # Ask player to play again
-
 
 def loss(condition_message):
   """
-  Clears and prints the loss scene with the custom message
+  Clears and prints the loss scene with the custom message.
 
   Args:
-    error_message (str): the message for the user
+    error_message (str): the message for the user.
   """
   with term.location (0, 13):
     for line in layout.loss_heading.split("\n"):
@@ -155,13 +157,16 @@ def loss(condition_message):
 
 def calculating(message):
   """
-  Places a positional text for user feedback on card drawn
+  Places a positional text for user feedback on card drawn.
+
+  Args: 
+    message (str): string containing our calculation message.
   """
   position(term.center(message), 0, 34, term.white_on_blue)
 
 def cont():
   """
-  places a positional text for user_feedback
+  places a positional text for user_feedback.
   """
   position(term.center("Press any key to continue the game..."), 0, 34, term.black_on_yellow)
   with term.cbreak(), term.hidden_cursor():

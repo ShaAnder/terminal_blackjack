@@ -46,7 +46,7 @@ def clear():
 def swap_screen():
   """
   Small loop for swapping between screens consisting of
-  our clear function and the sleep module
+  our clear function and the sleep module.
   """
   sleep(SLEEP_TIMER)
   clear()
@@ -54,8 +54,8 @@ def swap_screen():
 
 def create_deck():
   """
-  Creates a new deck of 52 card objects by passing each card suit, card and card value
-  into the Card class, then appending it to the deck array.
+  Creates a new deck of 52 card objects by passing each card suit, card and
+   card value into the Card class, then appending it to the deck array.
   """
   # we now create our deck of cards
   deck = []
@@ -163,7 +163,7 @@ def paint_board(dealer_cards, player_cards, dealer_score, player_score, conditio
     player_cards (arr): the players cards for printing
     dealer_score (int): the dealers current score for displaying
     player_score (int): the players current score for displaying
-    condition (str): the condition we pass in to determine what the board paints 
+    condition (str): condition we pass in to determine what the board paints 
   """
 
   # the reason this is 2 function calls in one is I want to not only paint the board
@@ -185,7 +185,7 @@ def paint_board(dealer_cards, player_cards, dealer_score, player_score, conditio
 
   # we have 3 conditions: accepting_inputs, calculating, continue state
   if condition == "accepting_inputs":
-    user_choice = get_user_input(TERMINAL_INPUT)
+    user_choice = get_user_input(TERMINAL_INPUT, "Please type H to hit or S to Stay: ")
     return user_choice
   elif condition == "continue":
     #if it's not accepting_inputs or calculating it must be user prompt to hit enter
@@ -193,19 +193,17 @@ def paint_board(dealer_cards, player_cards, dealer_score, player_score, conditio
   else:
     pass
   
-def validate_input(choice):
+def validate_input(choice, op1, op2):
   """
   Validates the input, and returns true if input is valid false if it is not.
   
   Args:
     user_choice (str): user choice, str if correct.
   """
-  
   # I wanted to keep the user input validation as simple as possible, to ensure that the 
   # user could not get any wrong ideas as well as not having to write an exhaustive loop
-
   # check to see if the user choice meets the criteria, if not more than one and not H or S
-  if len(choice) != 1 or (choice.upper() != 'H' and choice.upper() != 'S'):
+  if len(choice) != 1 or (choice.upper() != op1 and choice.upper() != op2):
     # return false so that loop does not return the correct choice
     return False
   # well if the input is valid, it must be what we want
@@ -226,6 +224,22 @@ def calculate_victor(player_win, message):
   else:
     loss(message)
   
+def play_again(deck):
+  """
+  Ask the user if they want to play again.
+  """
+  #clear screen
+  clear()
+  # get user input
+  try_again = get_user_input("Would you like to play again? Y/N: ")
+  # validate input
+  valid_try_again = validate_input(try_again, "Y", "N")
+  if valid_try_again == True:
+    # if validation == True reset game 
+    blackjack_start(deck)
+    
+
+
 def blackjack_start(deck):
   """
   Main blackjack function, each run is one game.
@@ -233,11 +247,9 @@ def blackjack_start(deck):
   Args:
     deck (arr): array containing our deck of card objects.
   """
-
   #####################
   #Setup Our Variables#
   #####################
-
   # set our player and dealers cards
   player_card_data = [] # Data containing the card objects
   player_cards = [] # Actual cards for printing
@@ -250,17 +262,13 @@ def blackjack_start(deck):
   # set our player and dealers scores
   player_score = 0
   dealer_score = 0
-
   # create an empty user input here so we can check it for validating
   user_choice = ""
-
   # set our game start variable
   game_on = True
-
   #######################
   #Step 1 Draw our Cards#
-  #######################
-   
+  #######################  
   # while loop to do our initial card drawing
   # i to keep track of the loops
   i = 0
@@ -274,46 +282,36 @@ def blackjack_start(deck):
     # once our player cards are at 2 break the loop
     if len(player_card_data) == 2:
       break
-
   # now we draw our dealers card, dealer will only draw one for simplicity
   # then when player finishes hitting the dealer will begin to draw his cards
-  draw_card(deck, dealer_card_data, dealer_cards, True)
-    
-  ### STEP 1.2 - CALCULATE OUR SCORE ###
-  
+  draw_card(deck, dealer_card_data, dealer_cards, True)   
+  ### STEP 1.2 - CALCULATE OUR SCORE ### 
   # player score calculated normally
   player_score = calculate_score(player_card_data)
   # dealer score calculated normally
-  dealer_score = calculate_score(dealer_card_data)
-
-  
+  dealer_score = calculate_score(dealer_card_data)  
   ##############################
   #Step 2 Draw our Instructions#
   ##############################
-
   # paint our intro 
   intro(display_cards(intro_cards))
   # swap screens
   swap_screen()
   # paint our instructions
   instructions()
-
   ######################
   #Step 3 Draw our Game#
   ######################
-
   # firstly we paint our game screen
   # we also get the return from this container func from our user validation
-  user_choice = paint_board(dealer_cards, player_cards, dealer_score, player_score, "accepting_inputs")
-  
+  user_choice = paint_board(dealer_cards, player_cards, dealer_score, player_score, "accepting_inputs")  
   #######################
   #Step 4 Begin Our Game#
   #######################
-
   # while game_on
   while player_score <= 21:
     ### 4.1 - If validation == True play game ###
-    is_validated = validate_input(user_choice)
+    is_validated = validate_input(user_choice, "H", "S")
     if is_validated == True:
       ### 4.3 - Player Chooses To Hit ###
       # the player chooses to hit, they are allowed to hit until they go bust or stand
@@ -342,7 +340,6 @@ def blackjack_start(deck):
           #let the dealer draw cards and calc score until it hit's 17
           draw_card(deck, dealer_card_data, dealer_cards, True)
           dealer_score += dealer_card_data[len(dealer_card_data) -1].card_value
-
           if dealer_score >= 17:
             clear()
             break
@@ -355,9 +352,7 @@ def blackjack_start(deck):
         calculating("All Draws Complete Calculating Winner...")
         sleep(2)
         paint_board(dealer_cards, player_cards, dealer_score, player_score, "continue")
-
         ### FIRST VICTORY CONDITION ### 
-
         ## BLACKJACK
         # Firstly check if there is a blackjack, we only check it here because
         # common sense is that a player will not it if they have a winning number
@@ -381,7 +376,6 @@ def blackjack_start(deck):
             swap_screen()
             calculate_victor("player", "Player Blackjack! Congratulations!")
           break
-
         elif player_score > dealer_score and player_score < 21:
           swap_screen()
           calculate_victor("player", f"Your score is: {player_score} the dealers is: {dealer_score}, You win!")
@@ -403,8 +397,8 @@ def blackjack_start(deck):
           swap_screen()
           calculate_victor("dealer", f"Your score is: {player_score} the dealers is: {dealer_score}, Double bust... You both lose...")
           break 
-      ### 4.5 - Regardless of choice, board is updated ###
-
+        sleep(1)
+        play_again()
     # well if if validated is not true, we need to throw our error and go again
     else:
       # if code not valid, throw error

@@ -17,7 +17,7 @@ class Card:
   def __init__(self, suit, value, card_value):
     #suit of the card we want to make
     self.suit = suit
-    # the valeu of the card (1-10, A, K)
+    # the value of the card (1-10, A, K)
     self.value = value
     # score of the card 
     self.card_value = card_value
