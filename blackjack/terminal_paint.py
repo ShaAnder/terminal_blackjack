@@ -157,12 +157,12 @@ def calculating(message):
   """
   Places a positional text for user feedback on card drawn
   """
-  position(term.center(message), 0, 30, term.white_on_blue)
+  position(term.center(message), 0, 34, term.white_on_blue)
 
 def cont():
   """
   places a positional text for user_feedback
   """
-  position(term.center("Press any key to continue the game..."), 0, 30, term.black_on_yellow)
+  position(term.center("Press any key to continue the game..."), 0, 34, term.black_on_yellow)
   with term.cbreak(), term.hidden_cursor():
     term.inkey()
