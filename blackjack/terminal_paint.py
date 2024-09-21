@@ -50,7 +50,7 @@ def intro(display_cards):
     for l in display_cards:
       print(term.yellow + term.center(l))
     # using our coordinate function, print our start text
-  position(term.center("A game of wits and chance, Press any key to continue"), 0, 25, term.black_on_yellow)
+  position(term.center("A game of wits and chance, Press any key to continue"), 0, 27, term.black_on_yellow)
   # check for inputs, then clear the screen
   with term.cbreak(), term.hidden_cursor():
     term.inkey()
@@ -61,12 +61,13 @@ def instructions():
   """
   Creats the instructions screen for the game
   """
-  for line in layout.welcome_heading.split("\n"):
-    print(term.yellow + term.center(line))
-  for line in layout.instructions_text.split("\n"):
-    print(term.white + term.center(line))
-  position(term.center(layout.house_text), 0, 35, term.black_on_yellow)
-  position(term.center("Press any key begin the game"), 0, 34, term.black_on_yellow)
+  with term.location (0, 8):
+    # gets every line in the logo, splits it and then prints / colors it
+    for line in layout.welcome_heading.split("\n"):
+      print(term.yellow + term.center(line))
+    for line in layout.instructions_text.split("\n"):
+      print(term.white + term.center(line))
+    position(term.center("Press any key begin the game"), 0, 27, term.black_on_yellow)
   with term.cbreak(), term.hidden_cursor():
     term.inkey()
 

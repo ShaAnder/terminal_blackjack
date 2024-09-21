@@ -41,17 +41,21 @@ loss_heading = """
 """
 
 instructions_text = """
-The aim of the game is 21! You must hit or get as close to 21 to beat your 
-opponent, who will also be trying to do the same!
+Blackjack! The classic game of 21! The aim of the game is to try and reach 21 
+before the dealer without going over!
 
-On starting the game, you will be dealt two cards with the option to 
-acquire more or hold your hand! The CPU will also be given the same!
+In this simplified version the player will draw first by hitting (H) 
+until they choose to stay (S) after which the dealer will take his turn. 
 
-Try to outwit the computer and be the first to blackjack!
+Once the dealer stops drawing it will calculate the scores and declare a winner!
+Good luck and remember... 
+
+The house always wins...
 
 """
 
 instructions_cards = """
+
  ┌─────────┐ ┌──────────┐ 
  │ 1       │ │ 6        │ 
  │         │ │          │ 
@@ -61,9 +65,6 @@ instructions_cards = """
  │       1 │ │        6 │ 
  └─────────┘ └──────────┘ 
 """
-
-house_text = "And remember the house always wins..."
-
 
 scores = """
 ────────────────────────────────────────────────────────────────────────────────
