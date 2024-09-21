@@ -46,6 +46,10 @@ While most bugs were caught during the testing of the project there were a few t
   sequence bug. This is due to the deck object being out of cards to draw. This was intentional as a planned feature is going to be to
   offer the user to reshuffle the deck. In the interim period this bug is solved by removing the `deck.remove(card)` from the draw
   card function
+  
+- The final bug is in the form of the win / loss screens, after passing them through the validator and applying the changes they sometimes
+  print improperly. Looking into a fix asap.
+
 
 ## PEP8 Python Validation
 
