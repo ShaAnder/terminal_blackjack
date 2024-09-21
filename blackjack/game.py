@@ -380,7 +380,7 @@ def blackjack_start(deck):
         sleep(2)
         clear()
         # get user input
-        try_again = get_user_input("Would you like to play again? Y/N: ")
+        try_again = get_user_input(TERMINAL_INPUT, "Would you like to play again? Y/N: ")
         # validate input
         valid_try_again = validate_input(try_again, "Y", "N")
         if valid_try_again == True:
