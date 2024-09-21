@@ -61,7 +61,7 @@ def instructions():
   """
   Creats the instructions screen for the game
   """
-  with term.location (0, 8):
+  with term.location (0, 7):
     # gets every line in the logo, splits it and then prints / colors it
     for line in layout.welcome_heading.split("\n"):
       print(term.yellow + term.center(line))

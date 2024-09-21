@@ -47,10 +47,9 @@ before the dealer without going over!
 In this simplified version the player will draw first by hitting (H) 
 until they choose to stay (S) after which the dealer will take his turn. 
 
-Once the dealer stops drawing it will calculate the scores and declare a winner!
-Good luck and remember... 
+Once the dealer stops, i t will calculate the scores and declare a winner!
 
-The house always wins...
+Good luck and remember... The house always wins...
 
 """
 
