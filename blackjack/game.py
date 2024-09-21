@@ -235,8 +235,12 @@ def play_again(deck):
   # validate input
   valid_try_again = validate_input(try_again, "Y", "N")
   if valid_try_again == True:
-    # if validation == True reset game 
-    blackjack_start(deck)
+    if try_again == "Y":
+      # if validation == True reset game 
+      clear()
+      blackjack_start(deck)
+    else:
+      exit()
     
 
 
@@ -398,7 +402,7 @@ def blackjack_start(deck):
           calculate_victor("dealer", f"Your score is: {player_score} the dealers is: {dealer_score}, Double bust... You both lose...")
           break 
         sleep(1)
-        play_again()
+        play_again(deck)
     # well if if validated is not true, we need to throw our error and go again
     else:
       # if code not valid, throw error
