@@ -124,7 +124,7 @@ def error_message(error_message):
   Args:
     error_message (str): the message for the user
   """
-  with term.location(0, 31):
+  with term.location(0, 35):
     print(term.yellow_on_black + term.center(error_message))
 
 def win(condition_message):
