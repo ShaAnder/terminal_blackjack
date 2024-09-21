@@ -43,17 +43,15 @@ def intro(display_cards):
   """
   Creates the intro screen using terminal paint.
   """
+  with term.location (0, 8):
   # gets every line in the logo, splits it and then prints / colors it
-  for line in layout.game_heading.split("\n"):
-    print(term.yellow + term.center(line))
-  for l in display_cards:
-    print(term.yellow + term.center(l))
-  # using our coordinate function, print our start text
-  position(term.center("A game of wits and chance, Press any key to continue"), 0, 34, term.black_on_yellow)
-  # check for inputs, then clear the screen, 
-  # break -> reads keystroke immediately after it's pressed
-  # hidden cursor -> hides cursor
-  # inkey -> key press event
+    for line in layout.game_heading.split("\n"):
+      print(term.yellow + term.center(line))
+    for l in display_cards:
+      print(term.yellow + term.center(l))
+    # using our coordinate function, print our start text
+  position(term.center("A game of wits and chance, Press any key to continue"), 0, 25, term.black_on_yellow)
+  # check for inputs, then clear the screen
   with term.cbreak(), term.hidden_cursor():
     term.inkey()
   # clear when inkey is recognized
@@ -138,7 +136,7 @@ def win(condition_message):
   with term.location (0, 13):
     for line in layout.win_heading.split("\n"):
         print(term.yellow + term.center(line))
-  position(term.center(condition_message), 0, 22, term.black_on_yellow) 
+  position(term.center(condition_message), 0, 23, term.black_on_yellow) 
   # Ask player to play again
 
 
@@ -152,7 +150,7 @@ def loss(condition_message):
   with term.location (0, 13):
     for line in layout.loss_heading.split("\n"):
         print(term.yellow + term.center(line))
-  position(term.center(condition_message), 0, 22, term.black_on_yellow) 
+  position(term.center(condition_message), 0, 23, term.black_on_yellow) 
 
 def calculating(message):
   """
