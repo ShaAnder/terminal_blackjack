@@ -241,7 +241,7 @@ def play_again(deck):
       blackjack_start(deck)
     else:
       clear()
-      break()
+      break
     
 
 
