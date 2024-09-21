@@ -1,5 +1,7 @@
 # Terminal Blackjack
 
+Terminal based blackjack game created for PP3 of the diploma in fullstack software development.
+
 <img src="./documentation/features/game-demo.gif" alt="game-dem-gif"/>
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/shaAnder/terminal_blackjack?color=red&style=for-the-badge)
