@@ -1,13 +1,13 @@
 # Terminal Blackjack
 
-![Terminal blackjack Gif]()
-
-Visit the deployed site: [Terminal Blackjack](https://shaAnder.github.io/Quizzical/)
+<img src="./documentation/features/game-demo.gif" alt="game-dem-gif"/>
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/shaAnder/terminal_blackjack?color=red&style=for-the-badge)
 ![GitHub contributors](https://img.shields.io/github/contributors/shaAnder/terminal_blackjack?color=orange&style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/shaAnder/terminal_blackjack?color=yellow&style=for-the-badge)
 ![GitHub top language](https://img.shields.io/github/languages/top/shaAnder/terminal_blackjack?color=green&style=for-the-badge)
+
+Visit the deployed site: [Terminal Blackjack](https://terminal-blackjack-d1281da886b8.herokuapp.com)
 
 ## CONTENTS
 
@@ -19,10 +19,6 @@ Visit the deployed site: [Terminal Blackjack](https://shaAnder.github.io/Quizzic
   - [Features](#features)
     - [Future Features](#future-features)
   - [Data Model](#data-model)
-  - [Testing](#testing)
-    - [Validator Testing](#validator-testing)
-    - [Bugs Found During Testing](#bugs-found-during-testing)
-    - [Known Remaining Bugs](#known-remaining-bugs)
   - [Deployment](#deployment)
   - [Development](#development)
     - [Languages](#languages)
@@ -74,9 +70,8 @@ The game runs utilizing a simplified version of the rules and concepts of blackj
 
 - The players attempt to beat the CPU by getting a count as close to 21 as possible, without going over 21.
 - Players can opt to hit or stand, hit will deal them another card, stand will prevent them from drawing new cards until the next round.
-- for simplicities sake the CPU will always try and draw until it is at 16 or over and then will automatically stand
+- For simplicities sake the CPU will always try and draw until it is at 17 or over and then will automatically stand
 - The closest player to 21 OR whoever lands on 21 wins, also for simplicities sake if both the player and CPU hit 21, the CPU (house) will be declared the winner
-- Whoever goes over 21 on their turn is automatically declared the loser.
 
 ---
 
