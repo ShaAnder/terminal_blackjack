@@ -101,48 +101,171 @@ As the owner:
 
 ### Features
 
+The key features of the application are outlined below:
+
+- Dynamic Terminal Output
+
+  - For the game, the [blessed](https://github.com/jquast/blessed) Python library was used to updte the terminal dynamically, allowing for great user experience
+  - To facilitate the repeated print statements, we utilized terminal commands in place, allowing us to dynamically print multiline strings
+    using `term` commands
+  - The following `gif` provides an example of this dynamic updating:
+      <details>
+      <summary><strong style="color:yellow">Dynamic game demo:</strong></summary>
+      <img src="./documentation/features/game-demo.gif" alt="game-dem-gif"/>
+      </details>
+
+- Data Validation
+
+  - As the game is primarily a terminal game we needed good data validation to ensure no game breaking occured
+  - In order to do this we dedicated a check_validation function solely for this:
+
+    - The function will check for the exact input we want and then return True if conditions met.
+
+      ```py
+      def validate_input(choice, op1, op2):
+        if len(choice) != 1 or (choice.upper() != op1 and choice.upper() != op2):
+        # return false so that loop does not return the correct choice
+          return False
+        # well if the input is valid, it must be what we want
+        else:
+          return True
+      ```
+
+      This logic while simple means that the user must give us 1 character and that character must match the
+      two options we put in.
+
+      An example of this is when we want to validate if the player hits or stands
+
+      ```py
+      validated_input = validate_input(user_choice, "H", "S")
+      ```
+
+      this also means the user can type "h" or "s" and it still is valid
+
+- User Friendly Interface
+
+  - When designing the game care was taken to ensure that the game was designed to be as clear and informative as posttible with extra care going into makeing sure the user was given clear feedback on their choices
+    - Instructions are provided at the start of the game:
+        <details>
+        <summary><strong style="color:lightgreen">Instructions:</strong></summary>
+        <img src="./documentation/features/instructions.png" alt="instructions"/>
+        </details>
+    - Input validation messages are displayed for invalid moves:
+        <details>
+        <summary><strong style="color:lightgreen">Input Validation:</strong></summary>
+        <img src="./documentation/features/validation.png" alt="input validations"/>
+        </details>
+    - During the game, the main screen keeps track of how many cards a user has and their score, same with the dealer
+      <details>
+      <summary><strong style="color:lightgreen">Status Dashbaord:</strong></summary>
+      <img src="./documentation/features/game_screen.png" alt="game-screen"/>
+      </details>
+    - Depending on whether the user wins or loses they are presented with either a win or a loss screen
+      <details>
+      <summary><strong style="color:lightgreen">Victory / Defeat Messages:</strong></summary>
+      <img src="./documentation/features/defeat.png" alt="defeat"/>
+      <img src="./documentation/features/victory.png" alt="victory"/>
+      </details>
+
+### Future Features
+
+Having now developed the game, there are additional features I can definitely see myself adding to the codebase in updates
+
+- Id definitely like to tweak the cpu behaviour to try and play more dynamically, calculating odds for one, instead of just drawing to
+  17 id like to try and build it out to think about best practices of when to hit and when to stand
+
+- Id like to also rebuild the game to utilize more rules of the blackjack game as well as hidden dealer cards more akin to the original
+  blackjack ruleset
+
+- I also want to build out scoring systems and the ability to reshuffle the deck when it runs out of cards.
+
 ---
 
 ### Data Model
 
+The data model for our game is built on the following files:
+
+- terminal_paint.py
+- card.py
+- layout.py
+- game.py
+- run.py
+
+By using these files we can create a slightly more modular game that utilizes good abstraction and more granular functions, as it stands I only created the Card
+class for organizing and creating cards but id like to build a few more classes out in future updates as I feel the game can be truly component based and modular.
+
+The following flowchart provides a high level overview of how the application works:
+
+  <details>
+  <summary><strong style="color:lightgreen">Flowchart / Data Model:</strong></summary>
+  <img src="./documentation/data_model/flowchart.png" alt="flowchart"/>
+  </details>
+
 ---
 
-### Testing
+## Development
+
+In developing this application, the following programming languages, tools and libraries were used:
+
+### Languages
+
+- Python
+- HTML
+- CSS
+- JavaScript
+- jQuery
+
+### Tools
+
+- **[VScode](https://code.visualstudio.com/)**  
+  All coding was created in vs code desktop deployed through a gitpod library
+- **[Heroku](http://heroku.com/)**  
+  Heroku was used for the deployment of the app as github pages does not support backend mock terminals
+- **[node-pty](https://github.com/microsoft/node-pty) and [xterm.js](https://github.com/xtermjs/xterm.js)**  
+  These were used to hos the mock terminal, and were integrated as part of the CI python essentials template
+- **[blessed](https://github.com/jquast/blessed)**  
+  This Python library was used to dynamically update the Terminal window.
 
 ---
 
 ### Deployment
 
----
+The site is deployed using GitHub Pages - [Terminal Blackjack](https://terminal-blackjack-d1281da886b8.herokuapp.com).
 
-### Development
+#### How to Fork
 
-I added this section to document the development process of the application so the user or assessor could get an idea of how I approached building this application.
+To fork the repository:
 
-From the get go I broke it up into three distinct phases.
+1. Log in (or sign up) to Github.
+2. Go to the repository for this project, [shaAnder/Quizzical](https://github.com/shaAnder/Quizzical)
+3. Click the Fork button in the top right corner.
 
-- Firstly I wanted to build a blackjack game that worked in the terminal. This was the most simple step as this is a pretty beginner friendly application to make.
-- From here the next step was refactoring the code to make it more lightweight and extendable.
-- The next and final phase was taking this lightweight code and rebuilding it in Blessed, this would remove any and all print statements, and allow us to effectively turn the terminal into our own gui
+#### How to Clone
 
-With these in mind, below you can find an exhaustive list of the broad steps I took to implement each process, the three major subsections are going to be split into P1, P2, P3 for easier reading
+To clone the repository:
 
-- #### P1: Building the blackjack app
+1. Log in (or sign up) to GitHub.
+2. Go to the repository for this project, [shaAnder/Quizzical](https://github.com/shaAnder/Quizzical)
+3. Click on the code button, select whether you would like to clone with HTTPS, SSH or GitHub CLI and copy the link shown.
+4. Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory.
+5. Type 'git clone' into the terminal and then paste the link you copied in step 3. Press enter.
 
-  14/09/2024
+#### How to Deploy to heroku
 
-  - We want to build a class based blackjack app, to that end the layout.py (to hold our terminal images, the game.py (for our game logic) and the card.py (to create our card) files are created)
-  - Card class created to hold our card attributes
-  - Variables holding all of our card attributes created
-  - Card building function created
-  - Added main deck creation to run.py, creates 52 card objects for us to use in the game
-
-  15/09/2024
-
-  - Added Ability to draw cards for the players
-  - Fixed cards not displaying side by side
-  - Added terminal paint files for intro / header screen
+1. Create a new heroku app
+2. In config vars use PORT = 8000
+3. Link the application to the repository
+4. Hit Deploy
 
 ---
 
 ### Credits & Attributions
+
+- **[blessed Python library](https://github.com/jquast/blessed)**
+  Example applications and the docs really helped this come together
+- **[xterm.js documentation](https://github.com/xtermjs/xterm.js/tree/4.14.1)**
+  I used this as reference to figure out how to modify terminal size
+- **[eoinlarkin](https://github.com/eoinlarkin)**
+  It was eoins own p3 project that put me onto blessed. To figure out how to make a terminal game
+  I poured through a lot of python pp3 projects to see how others did it and it was here I learnt
+  of the existence of blessed
