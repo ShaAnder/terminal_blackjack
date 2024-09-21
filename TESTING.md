@@ -30,8 +30,51 @@ The game was tested on a variety of browsers:
 
 It worked without issues in the above browsers.
 
+## BUG Fixing
+
+Throughout the course of the project I documented and squashed most of the known bugs, these are found in the git commit message logs
+under the "bug: " or "fix: " messages
+
+### Known Bugs
+
+While most bugs were caught during the testing of the project there were a few that I was unabele to fix in time or are known:
+
+- The first bug occurs during the end of the game, while the game is fully playable, it was reported that sometimes instead of restarting
+  the game, it would recalculate the victory / loss screen before restarting. During my testing I only encountered this once.
+
+- The second known bug comes from when the user plays too many rounds, eventually the game will present a cannot draw from empty
+  sequence bug. This is due to the deck object being out of cards to draw. This was intentional as a planned feature is going to be to
+  offer the user to reshuffle the deck. In the interim period this bug is solved by removing the `deck.remove(card)` from the draw
+  card function
+
 ## PEP8 Python Validation
 
-## Future Updates
+I ran all pages through the CI pep 8 validator and outside of a few of the string arguments going over 80 characters, found no
+errors in the formatting or layout of the code
+
+<details>
+<summary><strong style="color:yellow">Card Validation:</strong></summary>
+<img src="./documentation/testing/card_validation.png" alt="card validation"/>
+</details>
+
+<details>
+<summary><strong style="color:yellow">Game Validation:</strong></summary>
+<img src="./documentation/testing/game_validation.png"" alt="game validation"/>
+</details>
+
+<details>
+<summary><strong style="color:yellow">Layout Validation:</strong></summary>
+<img src="./documentation/testing/layout_validation.png"" alt="layout validation"/>
+</details>
+
+<details>
+<summary><strong style="color:yellow">Terminal Paint Validation:</strong></summary>
+<img src="./documentation/testing/terminal_paint_validation.png"" alt="terminal paint validation"/>
+</details>
+
+<br>
+
+Also while the code is perfectly valid, I feel that the formatting could be better and as such one of the major
+updates id like to do is to reformat it to be fully object oriented once the grading is complete
 
 ### [BACK TO README](https://github.com/shaAnder/terminal_blackjack/blob/main/README.md)
