@@ -21,10 +21,11 @@ Visit the deployed site: [Terminal Blackjack](https://terminal-blackjack-d1281da
   - [Features](#features)
     - [Future Features](#future-features)
   - [Data Model](#data-model)
-  - [Deployment](#deployment)
   - [Development](#development)
     - [Languages](#languages)
     - [Tools](#tools)
+  - [Testing](#testing)
+  - [Deployment](#deployment)
   - [Credits & Attributions](#credits---attributions)
     - [Attribution](#attributions-)
     - [Other](#other)
@@ -222,6 +223,15 @@ In developing this application, the following programming languages, tools and l
   These were used to hos the mock terminal, and were integrated as part of the CI python essentials template
 - **[blessed](https://github.com/jquast/blessed)**  
   This Python library was used to dynamically update the Terminal window.
+
+---
+
+### Testing
+
+Extensive testing of features was undertaken at every step of development, to ensure that the program worked effectively
+while some small bugs were found the program executes and plays without any gamebreaking issues. 
+
+Details on the testing can be found in the [Testing Document](https://github.com/ShaAnder/terminal_blackjack/main/TESTING.md) here.
 
 ---
 
