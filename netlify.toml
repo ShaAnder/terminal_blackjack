@@ -1,6 +1,4 @@
 [build]
   command = "python run.py"
   publish = "build/"
-
-[build.environment]
-  PYTHON_VERSION = "3.12.2"
+  environment = { PYTHON_VERSION = "3.12.2" }
