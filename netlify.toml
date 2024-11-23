@@ -1,5 +1,5 @@
 [build]
-  command = "python run.py
+  command = "python run.py"
   publish = "build/"
 
 [build.environment]
